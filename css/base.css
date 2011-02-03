@@ -1,0 +1,27 @@
+body {
+	margin: 0;
+	padding: 0;
+	background-color: #F6C76F;
+	background-image: url(images/bg_sub.gif);
+	background-repeat: repeat-x;	
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 12px;
+}
+
+body.home {
+	background-color: #A5246A;
+	background-image: url(images/bg_home.gif);
+	background-repeat: repeat-x;		
+}
+
+a:link, a:visited {
+	 color: #9B3547;
+}
+
+a:active, a:hover {
+	color: #E81E4B;
+}
+
+td {
+	font-size: 12px;
+}
