@@ -9,3 +9,6 @@ handlers:
 
 - url: /images
   static_dir: images
+
+- url: /register.*
+  script: app/register.py
