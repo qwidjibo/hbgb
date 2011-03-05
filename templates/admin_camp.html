@@ -1,0 +1,23 @@
+<html>
+  <head>
+    <title>Admin Camp</title>
+    <link rel="stylesheet" type="text/css" href="/css/base.css"/>
+  </head>
+
+  <body>
+    <p>So you think you can run a camp at burning man, do you?</p>
+
+    <form action="/admin/camp" method="post">
+      <div> Current Camp Year 
+	<input type="text" name="year" value="{{ conf.year }}" />
+      </div>
+      <div> Is Registration Open?
+	<input type="checkbox" name="reg_open"/>
+      </div>
+      <div>
+	<input type="submit" value="Save">
+      </div>
+    </form>
+    
+  </body>
+</html>
