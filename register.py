@@ -4,6 +4,8 @@ from google.appengine.api import users
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
 
+import camper
+
 class LandingPage(webapp.RequestHandler):
     def get(self):
         self.response.out.write("""
@@ -23,6 +25,10 @@ class CreateCamper(webapp.RequestHandler):
         self.response.out.write('<html><body>Welcome to the camp, ')
         self.response.out.write(cgi.escape(self.request.get('content')))
         self.response.out.write('</body></html>')
+        c = camper.Camper(name=cgi.escape(self.request.get('content')))
+        self.response.out.write('writing ' + c.name + ' to the db.')
+        c.put()
+
 
 application = webapp.WSGIApplication(
                                      [('/register', LandingPage),

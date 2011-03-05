@@ -11,4 +11,10 @@ handlers:
   static_dir: images
 
 - url: /register.*
-  script: app/register.py
+  script: register.py
+
+- url: /
+  script: landing.py
+
+- url: /static
+  static_dir: static_html
