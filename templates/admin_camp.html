@@ -42,14 +42,52 @@
       </div>
     </form>
 
-    <form action="admin/dates" method="post">
       <h2> Dates </h2>
 
 
+      <h3> Add a new date </h3>
+    <form action="/admin/dates/add" method="post">
       <div>
-	<input type="submit" value="Save">
+	YYYY:
+	<input type="text" size="5" name="year" value="{{ conf.year }}">
+	MM:
+	<input type="text" size="3" name="month">
+	DD:
+	<input type="text" size="3" name="day">
+	Early Team:
+	<input type="checkbox" name="early_team"/>
+	Strike:
+	<input type="checkbox" name="strike"/>
+	Description:
+	<input type="text" size="30" name="desc"/>
+      </div>
+
+      <div>
+	<input type="submit" value="Add">
       </div>
     </form>
+
+      <h3> Edit existing dates </h3>
+      {% for date in dates %}
+      <form action="/admin/dates/edit" method="post">
+	<b> {{ date.date }} </b>
+	<input type="hidden" name="key" value="{{ date.key }}">
+	Early Team:
+	<input type="checkbox" name="early_team" {% if date.early_team %} checked {% endif %} />
+	Strike:
+	<input type="checkbox" name="strike" {% if date.strike %} checked {% endif %} />
+	Description:
+	<input type="text" size="30" name="desc" value="{{ date.desc }}"/>	
+	<input type="submit" value="Save">
+      </form>      
+      <form action="/admin/dates/delete" method="post">
+	<input type="hidden" name="key" value="{{ date.key }}">
+	<input type="submit" action="/admin/dates/delete" value="Delete">
+      </form>
+
+      {% endfor %}
+
+
 
     <p><a href="/admin">Back to the main admin page</a></p>    
   </body>

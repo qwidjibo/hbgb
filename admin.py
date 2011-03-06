@@ -1,4 +1,5 @@
 import cgi
+import datetime
 import logging
 import os
 
@@ -9,6 +10,7 @@ from google.appengine.ext.webapp import template
 from google.appengine.ext.webapp.util import run_wsgi_app
 
 import camp
+import campdate
 
 class LandingPage(webapp.RequestHandler):
     def get(self):
@@ -19,7 +21,8 @@ class CampAdminPage(webapp.RequestHandler):
     def get(self):
         path = os.path.join(os.path.dirname(__file__), 'templates', 'admin_camp.html')
         conf = camp.current()
-        self.response.out.write(template.render(path, {'conf' : conf }))
+        dates = db.GqlQuery('SELECT * FROM CampDate ORDER BY date')
+        self.response.out.write(template.render(path, {'conf' : conf, 'dates' : dates}))
 
     def post(self):
         conf = camp.current()
@@ -32,8 +35,32 @@ class CampAdminPage(webapp.RequestHandler):
         conf.put()
         self.redirect('/admin/camp')
 
-class DatesAdminFormSubmit(webapp.RequestHandler):
+class DateAddFormSubmit(webapp.RequestHandler):
     def post(self):
+        d = datetime.date(int(self.request.get('year')),
+                          int(self.request.get('month')),
+                          int(self.request.get('day')))
+        cd = campdate.CampDate(date=d)
+        cd.early_team = self.request.get('early_team') == 'on'
+        cd.strike = self.request.get('strike') == 'on'
+        cd.desc = self.request.get('desc')
+        cd.put()
+
+        self.redirect('/admin/camp')
+
+class DateEditFormSubmit(webapp.RequestHandler):
+    def post(self):
+        cd = db.get(self.request.get('key'))
+        cd.early_team = self.request.get('early_team') == 'on'
+        cd.strike = self.request.get('strike') == 'on'
+        cd.desc = self.request.get('desc')
+        cd.put()
+
+        self.redirect('/admin/camp')
+
+class DateDeleteFormSubmit(webapp.RequestHandler):
+    def post(self):
+        db.delete(self.request.get('key'))
         self.redirect('/admin/camp')
 
 
@@ -41,7 +68,9 @@ application = webapp.WSGIApplication(
     [
         ('/admin', LandingPage),
         ('/admin/camp', CampAdminPage),
-        ('/admin/dates', DatesAdminFormSubmit)
+        ('/admin/dates/add', DateAddFormSubmit),
+        ('/admin/dates/edit', DateEditFormSubmit),
+        ('/admin/dates/delete', DateDeleteFormSubmit)
         ],
     debug=True)
 

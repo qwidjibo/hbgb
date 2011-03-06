@@ -14,12 +14,6 @@ class Camp(db.Model):
     strike_discount = db.IntegerProperty(required=True,
                                          default=50)
 
-class CampDate(db.Model):
-    date = db.DateProperty(required=True)
-    eary_team = db.BooleanProperty(default=False)
-    strike = db.BooleanProperty(default=False)
-    desc = db.StringProperty(default="")
-
 def current():
     camp = db.GqlQuery('SELECT * FROM Camp').get()
     if camp is None:
