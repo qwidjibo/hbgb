@@ -23,6 +23,10 @@ class LandingPage(webapp.RequestHandler):
         camper = db.get(self.request.cookies['_camper_key'])
         camper.realname = self.request.get('realname')
         camper.email = self.request.get('email')
+        camper.playaname = self.request.get('playaname')
+        camper.phone = self.request.get('phone')
+        camper.address = self.request.get('address')
+        camper.put()
 
         self.redirect('/register/basicinfo')
 
@@ -33,7 +37,7 @@ class BasicInfoPage(webapp.RequestHandler):
 
     def post(self):
         camper = db.get(self.request.cookies['_camper_key'])
-        camper.playaname = self.request.get('playaname')
+
         camper.put()
         self.redirect('/register/confirm')
 

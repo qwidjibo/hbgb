@@ -13,8 +13,9 @@ class Camper(db.Model):
         default='new')
     realname = db.StringProperty()
     playaname = db.StringProperty()
-    email = db.StringProperty()
-    
+    email = db.EmailProperty()
+    phone = db.PhoneNumberProperty()
+    address = db.PostalAddressProperty()
 
 
 
