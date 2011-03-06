@@ -5,19 +5,52 @@
   </head>
 
   <body>
+    <p><a href="/admin">Back to the main admin page</a></p>
+
     <p>So you think you can run a camp at burning man, do you?</p>
 
     <form action="/admin/camp" method="post">
+      <h2> Basic Registration Setup </h2>
       <div> Current Camp Year 
 	<input type="text" name="year" value="{{ conf.year }}" />
       </div>
       <div> Is Registration Open?
-	<input type="checkbox" name="reg_open"/>
+	<input type="checkbox" name="reg_open" {% if conf.reg_open %} checked {% endif %}/>
       </div>
+      <div> What 'registration is closed' message do you want to show? <br/>
+	<textarea rows=5 cols=60 name="reg_closed_message" value="{{ conf.reg_closed_message }}">{{ conf.reg_closed_message }}</textarea>
+      </div>
+
+      <div>
+	<input type="submit" value="Save">
+      </div>
+
+      <h2> Dues </h2>
+
+      <div> Base Dues
+	<input type="text" name="base_dues" value="{{ conf.base_dues }}" />
+      </div>
+      <div> Early Team Discount
+	<input type="text" name="early_team_discount" value="{{ conf.early_team_discount }}" />
+      </div>
+      <div> Strike Discount
+	<input type="text" name="strike_discount" value="{{ conf.strike_discount }}" />
+      </div>
+
       <div>
 	<input type="submit" value="Save">
       </div>
     </form>
-    
+
+    <form action="admin/dates" method="post">
+      <h2> Dates </h2>
+
+
+      <div>
+	<input type="submit" value="Save">
+      </div>
+    </form>
+
+    <p><a href="/admin">Back to the main admin page</a></p>    
   </body>
 </html>

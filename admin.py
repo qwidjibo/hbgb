@@ -1,4 +1,5 @@
 import cgi
+import logging
 import os
 
 from google.appengine.api import users
@@ -22,14 +23,25 @@ class CampAdminPage(webapp.RequestHandler):
 
     def post(self):
         conf = camp.current()
-        conf.year = self.request.get('year')
+        conf.year = int(self.request.get('year'))
+        conf.reg_open = self.request.get('reg_open') == 'on'
+        conf.reg_closed_message = self.request.get('reg_closed_message')
+        conf.base_dues = int(self.request.get('base_dues'))
+        conf.early_team_discount = int(self.request.get('early_team_discount'))
+        conf.strike_discount = int(self.request.get('strike_discount'))
         conf.put()
+        self.redirect('/admin/camp')
+
+class DatesAdminFormSubmit(webapp.RequestHandler):
+    def post(self):
+        self.redirect('/admin/camp')
 
 
 application = webapp.WSGIApplication(
     [
         ('/admin', LandingPage),
-        ('/admin/camp', CampAdminPage)
+        ('/admin/camp', CampAdminPage),
+        ('/admin/dates', DatesAdminFormSubmit)
         ],
     debug=True)
 
