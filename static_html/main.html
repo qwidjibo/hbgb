@@ -1,20 +1,54 @@
 <html>
   <head>
     <title>Welcome to the HeeBeeGeeBee Healers</title>
-    <link rel="stylesheet" type="text/css" href="/css/base.css"
+    <link rel="stylesheet" type="text/css" href="/css/base.css">
   </head>
 
-  <body>
 
-    <div>
-      <p>This is a leftnav bar!</p>
-      <a href="#" onclick="document.getElementById('content').src='_member_info.html'">Member Info</a>
-      <a href="#" onclick="document.getElementById('content').src='_playa_offerings.html'">Playa Offerings</a>
+<body>
+    <div id="sublogo">
+        <img src="/images/logo_sub.jpg" width="900" height="226" border="0" alt="HeeBeeGeeBee Healers">
     </div>
 
-    <iframe src="_blank.html" id="content">
-      Consider getting a browser written after the mid-90's.
-    </iframe>
+    <div> <!-- Containing div -->
+        <div class="divLeftNav"> <!-- float left-->
+
+    		<div class="topnav"><a href="/howtobe.php">HOW TO BE A HEEBEE</a>
+                <div class="secondnav"><a href="/registration.php">CAMP REGISTRATION</a></div>
+            </div>
+
+    		<div class="topnav"><a href="#" onclick="document.getElementById('content').src='_member_info.html'">CAMP MEMBER INFO</a>
+                <div class="secondnav"><a href="/logistics.php">CAMP LOGISTICS</a></div>
+                <div class="secondnav"><a href="/committees/index.php">COMMITTEES</a></div>
+                <div class="secondnav"><a href="/hbSignupForm/registrantList.php">CURRENT CAMPERS</a></div>
+                <div class="secondnav"><a href="/survival-guide.php">SURVIVAL GUIDE</a></div>
+                <div class="secondnav"><a href="/photogallery.php">PHOTO GALLERY</a></div>
+            </div>
+
+    		<div class="topnav"><a href="#" onclick="document.getElementById('content').src='_playa_offerings.html'">PLAYA OFFERINGS</a>
+                <div class="secondnav"><a href="/classroom.php">CLASSROOM SCHEDULE</a></div>
+                <div class="secondnav"><a href="/leave-no-trace.php">LEAVE NO TRACE PLAN</a></div>
+                <div class="secondnav"><a href="/site-plan.php">CAMP SITE PLAN</a></div>
+            </div>
+
+            <div class="topnav"><a href="/contact.php">CONTACT</a>
+            </div>
+
+            <div class="topnav"><a href="/">HOME</a>
+            </div>
+
+        </div> <!-- End left-->
+
+        <div class="divIFrame"><!-- RIGHT FLOAT -->
+            <iframe class="iFrame" src="_blank.html" id="content">
+                Consider getting a browser written after the mid-90's.
+            </iframe>
+        </div>
+        <!-- This div simply clears the floats -->
+        <div class="divClearFloats"></div>
+
+    </div><!-- Containing div -->
+    <div>Lets see where this ends up</div>
 
   </body>
 </html>

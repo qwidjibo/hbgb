@@ -1,0 +1,315 @@
+body {
+	margin: 0;
+	padding: 0;
+	background-color: #F6C76F;
+	background-image: url(images/bg_sub.gif);
+	background-repeat: repeat-x;	
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 12px;
+}
+
+body.home {
+	background-color: #A5246A;
+	background-image: url(images/bg_home.gif);
+	background-repeat: repeat-x;		
+}
+
+a:link, a:visited {
+	 color: #9B3547;
+}
+
+a:active, a:hover {
+	color: #E81E4B;
+}
+
+td {
+	font-size: 12px;
+}
+
+#container {
+	width: 900px;
+	position:relative;
+
+}
+
+#homenavigation {
+	position: absolute;
+	z-index: 110;
+	top: 36px;
+	left: 98px;
+	text-align: left;
+}
+
+#homecontent {
+	position: absolute;
+	z-index: 100;
+	top: 0px;
+	left: 0px;
+	color: #ffffff;
+	font-size: 16px;
+	line-height: 24px;
+	font-family: Helvetica, Arial, sans-serif;
+	text-align: left;
+}
+
+.homeLinks {
+	position: absolute;
+	z-index: 120;
+	top: 586px;
+	left: 45px;
+	color: #F6C86F;
+	font-size: 11px;
+	line-height: 24px;
+	font-family: Helvetica, Arial, sans-serif;
+	text-align: center;
+	width: 882px;
+	height: 170px;
+
+
+}
+
+
+.homeLinks a.bigger {
+	font-size: 14px;
+}
+
+.homeLinks a:link, .homeLinks a:visited {
+	 color: #F6C86F;
+}
+
+.homeLinks a:active, .homeLinks a:hover {
+	color: #ffffff;
+}
+
+
+.homeLinks a.bigger {
+	color: #A5246A;
+	background-color: #D68B6E;
+	text-decoration: none;
+	padding: 5px 6px 5px 6px;
+	text-align: center;
+}
+
+.homeLinks a.bigger:hover {	
+	background-color: #F6C86F;
+	color: #A5246A;
+	text-decoration: none;
+}
+
+
+
+#sublogo {
+	position: absolute;
+	z-index: 50;
+	top: 0px;
+	left: 0px;
+	text-align: left;
+}
+
+
+
+#pagecopy {
+	position: absolute;
+	z-index: 110;
+	top: 248px;
+	left: 319px;
+	color: #000000;
+	font-size: 12px;
+	line-height: 24px;
+	text-align: justify;
+	font-family: Helvetica, Arial, sans-serif;
+	text-align: left;
+	width: 540px;
+}
+
+#secondpagecopy {
+	position: absolute;
+	z-index: 110;
+	top: 225px;
+	left: 302px;
+	color: #000000;
+	font-size: 12px;
+	line-height: 24px;
+	text-align: justify;
+	font-family: Helvetica, Arial, sans-serif;
+	text-align: left;
+	width: 540px;
+}
+
+
+
+#pageheaderbanner {
+	position: absolute;
+	z-index: 102;
+	top: 126px;
+	left: 286px;
+}
+
+#pageheadertext {
+	position: absolute;
+	z-index: 103;
+	top: 132px;
+	left: 298px;
+	width: 568px;
+	font-size: 18px;
+	font-style: italic;
+	color: #ffffff;
+	text-align: center;
+}
+
+
+#subpagenavigation {
+	position: absolute;
+	z-index: 104;
+	top: 193px;
+	left: 90px;
+	width: 160px;
+	font-size: 11px;
+	color: #ffffff;
+	text-align: center;
+	height: 245px;
+
+}
+
+.topnav {
+	width: 160px;
+	padding: 5px;
+	background-color: #C4696E;
+	margin: 2px 0 2px 0;
+	font-family: helvetica, arial, sans-serif;
+}
+.topnav a {
+	font-size: 12px;
+}
+.topnav a:link, .topnav a:visited {
+	text-decoration: none;
+	color: #ffffff;
+}
+.topnav a:active, .topnav a:hover {
+	text-decoration: underline;
+	color: #ffffaa;
+}
+
+
+.secondnav {
+	width: 156px;
+	padding: 2px;
+	background-color: #D68B6E;
+	margin: 2px 0 2px 0;
+	font-family: helvetica, arial, sans-serif;
+}
+.secondnav a {
+	font-size: 11px;
+}
+.secondnav a:link, .secondnav a:visited {
+	text-decoration: none;
+	color: #ffffff;
+}
+.secondnav a:active, .secondnav a:hover {
+	text-decoration: underline;
+	color: #DE2A4E;
+}
+
+
+.thirdnav {
+	width: 152px;
+	padding: 2px;
+	background-color: #E2A86C;
+	margin: 2px 0 2px 0;
+	font-family: helvetica, arial, sans-serif;
+}
+.thirdnav a {
+	font-size: 10px;
+}
+.thirdnav a:link, .thirdnav a:visited {
+	text-decoration: none;
+	color: #ffffff;
+}
+.thirdnav a:active, .thirdnav a:hover {
+	text-decoration: underline;
+	color: #DE2A4E;
+}
+
+
+.h2 {
+	font-size: 20px; 
+	letter-spacing: 2px;
+	color: #4A3063;
+	margin: 10px;
+	font-family: helvetica, arial, sans-serif;	
+}
+
+.h3 {
+	font-size: 14px; 
+	letter-spacing: 1px;
+	color: #E81E4B;
+	font-family: helvetica, arial, sans-serif;	
+}
+
+.quote {
+	font-style:italic; 
+	padding: 0 50px 0 50px; 
+	color: #724C63;
+}
+.subtle {
+	color: #EC9C00;
+}
+
+
+
+/* SIGN UP FORM STYLES */
+
+.textSubmit{
+				color: #00f;
+				background-color: transparent;
+				text-decoration: underline;
+				border: none;
+				cursor: pointer;
+				cursor: hand;
+				text-align:left;
+				float:left;
+}
+.blackTextSubmit{
+				color: black;
+				background-color: transparent;
+				text-decoration: underline;
+				border: none;
+				cursor: pointer;
+				cursor: hand;
+				text-align:left;
+}
+
+.smallParens{
+				font-size:9pt;
+}
+
+
+.formTable {
+	 border-top: 1px solid #ffffcc;
+	 border-right: 1px solid #ffffcc;
+	 border-left: 1px solid #ffffcc;
+}
+.formTable td
+{
+	 border-bottom: 1px solid #ffffcc;
+}
+
+.registrantTable {
+	 border-top: 1px solid #9B3547;
+	 border-right: 1px solid #9B3547;
+	 border-left: 1px solid #9B3547;
+	 margin: 0;
+	 padding: 0;
+}
+
+.registrantTable td {
+	 padding: 2px 8px 2px 5px;
+	 border-bottom: 1px solid #9B3547;
+}
+
+.borderFree {
+	border: none;
+}
+.borderFree td {
+	border: none;
+}
