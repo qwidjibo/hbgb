@@ -1,0 +1,94 @@
+<html>
+  <head>
+    <title>Admin Camp</title>
+    <link rel="stylesheet" type="text/css" href="/css/base.css"/>
+  </head>
+
+  <body>
+    <p><a href="/admin">Back to the main admin page</a></p>
+
+    <p>So you think you can run a camp at burning man, do you?</p>
+
+    <form action="/admin/camp" method="post">
+      <h2> Basic Registration Setup </h2>
+      <div> Current Camp Year 
+	<input type="text" name="year" value="{{ conf.year }}" />
+      </div>
+      <div> Is Registration Open?
+	<input type="checkbox" name="reg_open" {% if conf.reg_open %} checked {% endif %}/>
+      </div>
+      <div> What 'registration is closed' message do you want to show? <br/>
+	<textarea rows=5 cols=60 name="reg_closed_message" value="{{ conf.reg_closed_message }}">{{ conf.reg_closed_message }}</textarea>
+      </div>
+
+      <div>
+	<input type="submit" value="Save">
+      </div>
+
+      <h2> Dues </h2>
+
+      <div> Base Dues
+	<input type="text" name="base_dues" value="{{ conf.base_dues }}" />
+      </div>
+      <div> Early Team Discount
+	<input type="text" name="early_team_discount" value="{{ conf.early_team_discount }}" />
+      </div>
+      <div> Strike Discount
+	<input type="text" name="strike_discount" value="{{ conf.strike_discount }}" />
+      </div>
+
+      <div>
+	<input type="submit" value="Save">
+      </div>
+    </form>
+
+      <h2> Dates </h2>
+
+
+      <h3> Add a new date </h3>
+    <form action="/admin/dates/add" method="post">
+      <div>
+	YYYY:
+	<input type="text" size="5" name="year" value="{{ conf.year }}">
+	MM:
+	<input type="text" size="3" name="month">
+	DD:
+	<input type="text" size="3" name="day">
+	Early Team:
+	<input type="checkbox" name="early_team"/>
+	Strike:
+	<input type="checkbox" name="strike"/>
+	Description:
+	<input type="text" size="30" name="desc"/>
+      </div>
+
+      <div>
+	<input type="submit" value="Add">
+      </div>
+    </form>
+
+      <h3> Edit existing dates </h3>
+      {% for date in dates %}
+      <form action="/admin/dates/edit" method="post">
+	<b> {{ date.date }} </b>
+	<input type="hidden" name="key" value="{{ date.key }}">
+	Early Team:
+	<input type="checkbox" name="early_team" {% if date.early_team %} checked {% endif %} />
+	Strike:
+	<input type="checkbox" name="strike" {% if date.strike %} checked {% endif %} />
+	Description:
+	<input type="text" size="30" name="desc" value="{{ date.desc }}"/>	
+	<input type="submit" value="Save">
+      </form>      
+      <form action="/admin/dates/delete" method="post">
+	<input type="hidden" name="key" value="{{ date.key }}">
+	<input type="submit" action="/admin/dates/delete" value="Delete">
+      </form>
+
+      {% endfor %}
+
+
+
+    <p><a href="/admin">Back to the main admin page</a></p>    
+  </body>
+</html>
