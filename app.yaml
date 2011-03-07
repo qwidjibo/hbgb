@@ -13,11 +13,8 @@ handlers:
 - url: /register.*
   script: register.py
 
-- url: /admin.*
-  script: admin.py
-
 - url: /
-  script: landing.py
+  script: static.py
 
-- url: /static
-  static_dir: static_html
+- url: .*html
+  script: static.py
