@@ -16,6 +16,12 @@ class Camper(db.Model):
     email = db.EmailProperty()
     phone = db.PhoneNumberProperty()
     address = db.PostalAddressProperty()
+    returning = db.BooleanProperty()
 
-
-
+    years_as_heebee = db.StringProperty()
+    previous_camps = db.TextProperty()
+    burns = db.IntegerProperty()
+    default_world_job = db.TextProperty()
+    why_heebees = db.TextProperty()
+    story = db.TextProperty()
+    

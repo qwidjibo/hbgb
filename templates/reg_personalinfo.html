@@ -5,10 +5,43 @@
   </head>
 
   <body>
-    <p>First, we need to collect some of your basic information</p>
+    <form action="/register/personalinfo" method="post">
 
-    <form action="/register/basicinfo" method="post">
-      <div>What is your playa name?<br><input type="text" name="playaname" /></div>
+      {% if camper.returning %}
+      What years were you a heebee? <input type="text" name="years_as_heebee"/>
+      {% else %}
+      Ever been to burning man?
+      <input type="checkbox" onclick="document.getElementById('burns_div').style.display = this.checked ? 'inline' : 'none'">
+      <div style="display:none" id="burns_div">
+	<br/>How many times?
+	<input type="text" name="burns"/>
+	<br/>Ever camped with a theme camp?
+	<input type="checkbox" onclick="document.getElementById('previous_camps_div').style.display = this.checked ? 'inline' : 'none'">
+	<div style="display:none" id="previous_camps_div">
+	  <br/>Please list previous camps, years, and roles.
+	  <textarea name="previous_camps" rows="10" cols="80"></textarea>
+	</div>
+
+      </div>
+      {% endif %}
+
+      <div>
+	What do you do in the default world? <br/>
+	<textarea name="default_world_job" rows="10" cols ="80"></textarea>
+      </div>
+
+      <div>
+	Why do you want to be a part of our camp, and what do you think you bring with you? <br/>
+	<textarea name="why_heebees" rows="10" cols ="80"></textarea>
+      </div>
+
+      <div>
+	<h4>Story Time</h4>
+You open your eyes and wipe the dust off your face. A quick cough next to you starts to bring back flashes of last night. You remember dancing in the pink panties pagoda to Lorin Bassnectar. You thought you were dreaming. Then the most amazing person comes up and wants you to follow them. You hear someone question you, "Who are you camping with?" Of course, you say that you are a HeeBee. Your guide turns and shoots you a huge smile. Where am I going, you think. Then you duck under a pink taffeta cloth and have to get on your knees in order to crawl through a tight pink tunnel. The dust makes you sneeze. Some one laughs and you hurry up. You realize that your memories get a little fuzzy from there. You need to stretch. So you try to get up but your arm is quite numb. Looking to your left you see a big bundle of pink sleeping on your arm. The pink cloth starts to rustle and...:
+	<h4>What Happens Next, And What Do You Do?</h4>
+	<textarea name="story" rows="10" cols="80"></textarea>
+      </div>
+
       <div><input type="submit" value="Continue" /></div>
     </form>
   </body>

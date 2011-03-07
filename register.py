@@ -26,18 +26,28 @@ class LandingPage(webapp.RequestHandler):
         camper.playaname = self.request.get('playaname')
         camper.phone = self.request.get('phone')
         camper.address = self.request.get('address')
+        camper.returning = self.request.get('returning') == 'on'
         camper.put()
 
-        self.redirect('/register/basicinfo')
+        self.redirect('/register/personalinfo')
 
-class BasicInfoPage(webapp.RequestHandler):
+class PersonalInfoPage(webapp.RequestHandler):
     def get(self):
-        path = os.path.join(os.path.dirname(__file__), 'templates', 'reg_basicinfo.html')
-        self.response.out.write(template.render(path, { }))
+        camper = db.get(self.request.cookies['_camper_key'])
+        path = os.path.join(os.path.dirname(__file__), 'templates', 'reg_personalinfo.html')
+        self.response.out.write(template.render(path, { 'camper' : camper }))
 
     def post(self):
         camper = db.get(self.request.cookies['_camper_key'])
-
+        if self.request.get('burns'):
+            camper.burns = int(self.request.get('burns'))
+        else:
+            camper.burns = 0
+        camper.years_as_heebee = self.request.get('years_as_heebee')
+        camper.previous_camps = self.request.get('previous_camps')
+        camper.default_world_job = self.request.get('default_world_job')
+        camper.why_heebees = self.request.get('why_heebees')
+        camper.story = self.request.get('story')
         camper.put()
         self.redirect('/register/confirm')
 
@@ -49,7 +59,7 @@ class ConfirmationPage(webapp.RequestHandler):
 application = webapp.WSGIApplication(
     [
         ('/register', LandingPage),
-        ('/register/basicinfo', BasicInfoPage),
+        ('/register/personalinfo', PersonalInfoPage),
         ('/register/confirm', ConfirmationPage),
         ],
     debug=True)
