@@ -11,7 +11,7 @@ class HomePage(webapp.RequestHandler):
     def get(self):
         path = os.path.join(os.path.dirname(__file__), 'templates', 'index.html')        
         conf = camp.current()
-        self.response.out.write(template.render(path, { 'conf' : conf }))
+        self.response.out.write(template.render(path, { 'camp' : conf }))
 
 class StaticTemplate(webapp.RequestHandler):
     def get(self):
@@ -22,7 +22,7 @@ class StaticTemplate(webapp.RequestHandler):
         path_lst.reverse()
         path = os.sep.join(path_lst)
         conf = camp.current()
-        self.response.out.write(template.render(path, { 'conf' : conf }))
+        self.response.out.write(template.render(path, { 'camp' : conf }))
 
 
 application = webapp.WSGIApplication(

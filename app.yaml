@@ -13,6 +13,9 @@ handlers:
 - url: /register.*
   script: register.py
 
+- url: /admin.*
+  script: admin.py
+
 - url: /
   script: static.py
 
