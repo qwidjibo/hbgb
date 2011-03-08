@@ -40,12 +40,27 @@
       <div>
 	<input type="submit" value="Save">
       </div>
+
     </form>
 
-      <h2> Dates </h2>
+    <h2> Committees </h2>
+    <form action="/admin/committee/add" method="post">
+      <input type="text" name="committee" size="20"/>
+      <input type="submit" value="Add"/>
+    </form>
+    {% for committee in conf.committees %}
+    <form action="/admin/committee/delete" method="post">
+      {{ committee }} 
+      <input type="hidden" name="committee" value="{{ committee }}"/>
+      <input type="submit" value="Delete">
+    </form>
+    {% endfor %}
+  
+
+    <h2> Dates </h2>
 
 
-      <h3> Add a new date </h3>
+    <h3> Add a new date </h3>
     <form action="/admin/dates/add" method="post">
       <div>
 	YYYY:

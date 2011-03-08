@@ -63,6 +63,19 @@ class DateDeleteFormSubmit(webapp.RequestHandler):
         db.delete(self.request.get('key'))
         self.redirect('/admin/camp')
 
+class CommitteeAddFormSubmit(webapp.RequestHandler):
+    def post(self):
+        conf = camp.current()
+        conf.committees.append(self.request.get('committee'))
+        conf.put()
+        self.redirect('/admin/camp')
+
+class CommitteeDeleteFormSubmit(webapp.RequestHandler):
+    def post(self):
+        conf = camp.current()
+        conf.committees.remove(self.request.get('committee'))
+        conf.put()        
+        self.redirect('/admin/camp')
 
 application = webapp.WSGIApplication(
     [
@@ -70,7 +83,9 @@ application = webapp.WSGIApplication(
         ('/admin/camp', CampAdminPage),
         ('/admin/dates/add', DateAddFormSubmit),
         ('/admin/dates/edit', DateEditFormSubmit),
-        ('/admin/dates/delete', DateDeleteFormSubmit)
+        ('/admin/dates/delete', DateDeleteFormSubmit),
+        ('/admin/committee/add', CommitteeAddFormSubmit),
+        ('/admin/committee/delete', CommitteeDeleteFormSubmit)
         ],
     debug=True)
 
