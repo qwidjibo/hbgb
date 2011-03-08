@@ -9,15 +9,17 @@ from google.appengine.ext.webapp import template
 from google.appengine.ext.webapp.util import run_wsgi_app
 
 import camper
+import camp
 
 class LandingPage(webapp.RequestHandler):
     def get(self):
+        conf = camp.current()
         c = camper.Camper()
         c.put()
         self.response.headers.add_header('Set-Cookie', '_camper_key=%s' % (c.key()))
         
         path = os.path.join(os.path.dirname(__file__), 'templates', 'reg_landing.html')
-        self.response.out.write(template.render(path, { }))
+        self.response.out.write(template.render(path, {'camp' : conf }))
 
     def post(self):
         camper = db.get(self.request.cookies['_camper_key'])
@@ -33,9 +35,10 @@ class LandingPage(webapp.RequestHandler):
 
 class PersonalInfoPage(webapp.RequestHandler):
     def get(self):
+        conf = camp.current()
         camper = db.get(self.request.cookies['_camper_key'])
         path = os.path.join(os.path.dirname(__file__), 'templates', 'reg_personalinfo.html')
-        self.response.out.write(template.render(path, { 'camper' : camper }))
+        self.response.out.write(template.render(path, { 'camper' : camper, 'camp' : conf }))
 
     def post(self):
         camper = db.get(self.request.cookies['_camper_key'])
@@ -49,10 +52,28 @@ class PersonalInfoPage(webapp.RequestHandler):
         camper.why_heebees = self.request.get('why_heebees')
         camper.story = self.request.get('story')
         camper.put()
+        self.redirect('/register/playainfo')
+
+class PlayaInfoPage(webapp.RequestHandler):
+    def get(self):
+        conf = camp.current()
+        camper = db.get(self.request.cookies['_camper_key'])
+        
+        path = os.path.join(os.path.dirname(__file__), 'templates', 'reg_playainfo.html')
+        self.response.out.write(template.render(path, { 'camper' : camper, 'camp' : conf }))
+
+    def post(self):
+        camper = db.get(self.request.cookies['_camper_key'])
+        camper.first_choice_committee = self.request.get('first_choice_committee')
+        camper.second_choice_committee = self.request.get('second_choice_committee')
+        camper.first_choice_reason = self.request.get('first_choice_reason')
+        camper.second_choice_reason = self.request.get('second_choice_reason')
+        camper.put()
         self.redirect('/register/confirm')
 
 class ConfirmationPage(webapp.RequestHandler):
     def get(self):
+        conf = camp.current()
         self.response.out.write('All done!')
 
 
@@ -60,6 +81,7 @@ application = webapp.WSGIApplication(
     [
         ('/register', LandingPage),
         ('/register/personalinfo', PersonalInfoPage),
+        ('/register/playainfo', PlayaInfoPage),
         ('/register/confirm', ConfirmationPage),
         ],
     debug=True)
