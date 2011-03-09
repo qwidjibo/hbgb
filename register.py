@@ -68,12 +68,64 @@ class PlayaInfoPage(webapp.RequestHandler):
         camper.second_choice_committee = self.request.get('second_choice_committee')
         camper.first_choice_reason = self.request.get('first_choice_reason')
         camper.second_choice_reason = self.request.get('second_choice_reason')
+        camper.wants_to_heal = self.request.get('wants_to_heal') == 'on'
+        camper.wants_to_teach = self.request.get('wants_to_teach') == 'on'
+        camper.wants_to_lead = self.request.get('wants_to_lead') == 'on'
+        camper.teaching_info = self.request.get('teaching_info')
+        camper.early_team = self.request.get('early_team') == 'on'
+        camper.strike = self.request.get('strike') == 'on'
+        camper.arrival_date = self.request.get('arrival_date')
+        camper.departure_date = self.request.get('departure_date')
+        camper.arrival_time = self.request.get('arrival_time')
+        camper.departure_time = self.request.get('departure_time')
+        camper.transportation_means = self.request.get('transportation_means')
+        bringing_rv = self.request.get('bringing_rv')
+        rv_hookup = self.request.get('rv_hookup')
+        rv_info = self.request.get('rv_info')
+        dorm_tent = self.request.get('dorm_tent') == 'on'
+        structure_info = self.request.get('structure_info')
+        food_type = self.request.get('food_type')
+        eats_beef = self.request.get('eats_beef') == 'on'
+        eats_chicken = self.request.get('eats_chicken') == 'on'
+        eats_pork = self.request.get('eats_pork') == 'on'
+        eats_bacon = self.request.get('eats_bacon') == 'on'
+        eats_fish = self.request.get('eats_fish') == 'on'
+        eats_tofu = self.request.get('eats_tofu') == 'on'
+        eats_human = self.request.get('eats_human') == 'on'
+        dietary_restrictions = self.request.get('dietary_restrictions')
         camper.put()
+
+        if camper.wants_to_heal:
+            self.redirect('/register/healerinfo')
+        else:
+            self.redirect('/register/photoupload')
+
+class HealerInfoPage(webapp.RequestHandler):
+    def get(self):
+        conf = camp.current()
+        camper = db.get(self.request.cookies['_camper_key'])
+        path = os.path.join(os.path.dirname(__file__), 'templates', 'reg_healerinfo.html')
+        self.response.out.write(template.render(path, { 'camper' : camper, 'camp' : conf }))
+
+    def post(self):
+        camper = db.get(self.request.cookies['_camper_key'])
+        self.redirect('/register/photoupload')
+
+class PhotoUploadPage(webapp.RequestHandler):
+    def get(self):
+        conf = camp.current()
+        camper = db.get(self.request.cookies['_camper_key'])
+        path = os.path.join(os.path.dirname(__file__), 'templates', 'reg_photoupload.html')
+        self.response.out.write(template.render(path, { 'camper' : camper, 'camp' : conf }))
+
+    def post(self):
+        camper = db.get(self.request.cookies['_camper_key'])
         self.redirect('/register/confirm')
 
 class ConfirmationPage(webapp.RequestHandler):
     def get(self):
         conf = camp.current()
+        camper = db.get(self.request.cookies['_camper_key'])
         self.response.out.write('All done!')
 
 
@@ -82,6 +134,8 @@ application = webapp.WSGIApplication(
         ('/register', LandingPage),
         ('/register/personalinfo', PersonalInfoPage),
         ('/register/playainfo', PlayaInfoPage),
+        ('/register/healerinfo', HealerInfoPage),
+        ('/register/photoupload', PhotoUploadPage),
         ('/register/confirm', ConfirmationPage),
         ],
     debug=True)

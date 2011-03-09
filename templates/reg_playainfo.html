@@ -31,8 +31,52 @@
       <textarea name="second_choice_reason" rows=10 cols=80></textarea>
     </div>
 
+    <div> Do you intend to heal in the healing space
+      <input type="checkbox" name="wants_to_heal" />
+    </div>
 
-      <div><input type="submit" value="Continue" /></div>
+    <div> Do you intend to teach in the classroom space
+      <input type="checkbox" name="wants_to_teach" onclick="document.getElementById('teaching_info_div').style.display = this.checked ? 'inline' : 'none'"/>
+    </div>
+
+    <div id="teaching_info_div" style="display:none"> Please describe the class you would like to teach
+      <textarea name="teaching_info" rows="5" cols="80"></textarea>
+    </div>      
+
+    <div>I am interested in taking a leadership role with the camp 
+      <input type="checkbox" name="wants_to_lead">
+    </div>
+    
+    <div>
+      How will you get to burning man?
+      <select name="transportation_means">
+	<option value="fly">Fly</option>
+	<option value="drive">Drive</option>
+	<option value="unsure">Not sure</option>
+	<option value="want_to_carpool">Want to carpool</option>
+	<option value="ride_to_offer">Can offer ride</option>
+      </select>
+    </div>
+
+    <div>I'm bringing an RV
+      <input type="checkbox" name="bringing_rv" onclick="document.getElementById('rv_info_div').style.display = this.checked ? 'inline' : 'none'"/>
+    </div>
+
+    <div id="rv_info_div" style="display:none">
+      I want a hookup for my RV ($75 charge)<input type="checkbox" name="rv_hookup"/>
+      How big is the vehicle? <input type="text" name="rv_info" size="40"/>
+    </div>
+
+    <div>
+      I will be staying in the dorm tent <input type="checkbox" name="dorm_tent" onclick="document.getElementById('structure_info_div').style.display = this.checked ? 'none': 'inline'" checked/>
+    </div>
+
+    <div id="structure_info_div" style="display:none">
+      Please describe your personal structure (with size info):
+      <textarea name="structure_info" rows="10" cols="80"></textarea>
+    </div>
+
+    <div><input type="submit" value="Continue" /></div>
     </form>
   </body>
 </html>
