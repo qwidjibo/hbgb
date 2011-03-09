@@ -19,80 +19,37 @@ body
 	font-size: 12px;
 }
 
-body.home
-{
-	background-color: #A5246A;
-	background-image: url(images/bg_home.gif);
-	background-repeat: repeat-x;
-}
-
-
-
 td
 {
 	font-size: 12px;
 }
 
-
-
-.homeLinks
-{
-	position: absolute;
-	z-index: 120;
-	top: 586px;
-	left: 45px;
-	color: #F6C86F;
-	font-size: 11px;
-	line-height: 24px;
-	font-family: Helvetica, Arial, sans-serif;
-	text-align: center;
-	width: 882px;
-	height: 170px;
-}
-
-
-.homeLinks a.bigger
-{
-	font-size: 14px;
-}
-
-.homeLinks a:link, .homeLinks a:visited
-{
-	 color: #F6C86F;
-}
-
-.homeLinks a:active, .homeLinks a:hover
-{
-	color: #ffffff;
-}
-
-
-.homeLinks a.bigger
-{
-	color: #A5246A;
-	background-color: #D68B6E;
-	text-decoration: none;
-	padding: 5px 6px 5px 6px;
-	text-align: center;
-}
-
-.homeLinks a.bigger:hover
-{
-	background-color: #F6C86F;
-	color: #A5246A;
-	text-decoration: none;
-}
-
 .divLeftNav
 {
+    position: absolute;
+    z-index: 104;
+    top: 193px;
+    left: 90px;
     width: 160px;
-    float: left;
+    font-size: 11px;
+    color: white;
+    text-align: center;
+    height: 245px;
 }
 
 .divIFrame
 {
-    width: 600px;
-    float: right;
+    position: absolute;
+    z-index: 110;
+    top: 248px;
+    left: 319px;
+    color: black;
+    font-size: 12px;
+    line-height: 24px;
+    text-align: justify;
+    font-family: Helvetica, Arial, sans-serif;
+    text-align: left;
+    width: 540px;    
 }
 
 .divClearFloats
