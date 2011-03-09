@@ -37,7 +37,20 @@ td
     height: 245px;
 }
 
-.divIFrame
+.divSubtitle
+{
+    position: absolute;
+    z-index: 103;
+    top: 132px;
+    left: 298px;
+    width: 568px;
+    font-size: 18px;
+    font-style: italic;
+    color: white;
+    text-align: center;
+}
+
+.divContent
 {
     position: absolute;
     z-index: 110;
