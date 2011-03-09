@@ -1,0 +1,38 @@
+<html>
+  <head>
+    <title>Register for the HeeBeeGeeBees</title>
+    <link rel="stylesheet" type="text/css" href="/css/base.css"/>
+  </head>
+
+  <body>
+    <form action="/register/playainfo" method="post">
+
+    <div> What is your first choice committee?
+      <select name="first_choice_committee">
+	{% for committee in camp.committees %}
+	<option>{{ committee }}</option>
+	{% endfor %}
+      </select>
+    </div>
+      
+    <div> What is your second choice committee?
+	<select name="second_choice_committee">
+	  {% for committee in camp.committees %}
+	  <option>{{ committee }}</option>
+	  {% endfor %}
+	</select>
+    </div>
+
+    <div> Why do you want your first choice committee?
+      <textarea name="first_choice_reason" rows=10 cols=80></textarea>
+    </div>
+
+    <div> Why do you want your second choice committee?
+      <textarea name="second_choice_reason" rows=10 cols=80></textarea>
+    </div>
+
+
+      <div><input type="submit" value="Continue" /></div>
+    </form>
+  </body>
+</html>
