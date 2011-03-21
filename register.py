@@ -120,13 +120,87 @@ class PhotoUploadPage(webapp.RequestHandler):
 
     def post(self):
         camper = db.get(self.request.cookies['_camper_key'])
+        camper.photo = db.Blob(self.request.get("photo"))
+        camper.put()
         self.redirect('/register/confirm')
 
 class ConfirmationPage(webapp.RequestHandler):
     def get(self):
         conf = camp.current()
         camper = db.get(self.request.cookies['_camper_key'])
-        self.response.out.write('All done!')
+        path = os.path.join(os.path.dirname(__file__), 'templates', 'reg_confirm.html')
+        self.response.out.write(template.render(path, { 'camper' : camper, 'camp' : conf }))
+
+    def post(self):
+        camper = db.get(self.request.cookies['_camper_key'])
+        realname = 
+        playaname = 
+        email = 
+        phone = 
+        address = 
+        returning = 
+
+        years_as_heebee = 
+        previous_camps = 
+        burns = 
+        default_world_job = 
+        why_heebees = 
+        story = 
+    
+        first_choice_committee = 
+        second_choice_committee = 
+        first_choice_reason = 
+        second_choice_reason = 
+
+        wants_to_heal = 
+        wants_to_teach = 
+        wants_to_lead = 
+        teaching_info = 
+    
+        early_team = 
+        strike = 
+        
+        arrival_date = 
+        departure_date = 
+
+        arrival_time = 
+
+        departure_time = 
+
+        transportation_means = 
+    
+        bringing_rv = 
+        rv_hookup = 
+        rv_info = 
+
+        dorm_tent =
+        structure_info = 
+
+        food_type = 
+        
+        eats_beef = 
+        eats_chicken = 
+        eats_pork = 
+        eats_bacon = 
+        eats_fish = 
+        eats_tofu = 
+        eats_human = 
+
+        dietary_restrictions = 
+
+        photo = 
+
+
+        camper.put()
+        self.redirect('/register/complete')
+
+
+class CompletePage(webapp.RequestHandler):
+    def get(self):
+        conf = camp.current()
+        camper = db.get(self.request.cookies['_camper_key'])
+        path = os.path.join(os.path.dirname(__file__), 'templates', 'reg_complete.html')
+        self.response.out.write(template.render(path, { 'camper' : camper, 'camp' : conf }))
 
 
 application = webapp.WSGIApplication(
@@ -137,6 +211,7 @@ application = webapp.WSGIApplication(
         ('/register/healerinfo', HealerInfoPage),
         ('/register/photoupload', PhotoUploadPage),
         ('/register/confirm', ConfirmationPage),
+        ('/register/complate', CompletePage),
         ],
     debug=True)
 

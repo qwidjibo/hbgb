@@ -78,3 +78,5 @@ class Camper(db.Model):
     eats_human = db.BooleanProperty()
 
     dietary_restrictions = db.TextProperty()
+
+    photo = db.BlobProperty()
