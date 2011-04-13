@@ -10,6 +10,7 @@ from google.appengine.ext.webapp.util import run_wsgi_app
 
 import camper
 import camp
+import healer
 
 class LandingPage(webapp.RequestHandler):
     def get(self):
@@ -109,6 +110,19 @@ class HealerInfoPage(webapp.RequestHandler):
 
     def post(self):
         camper = db.get(self.request.cookies['_camper_key'])
+        h = healer.Healer()
+        h.camper = camper
+        h.status = 'registered'
+        h.modalities = self.request.get('modalities')
+        h.certifications = self.request.get('certifications')
+        h.professional = self.request.get('professional') == 'on'
+        h.years_as_healer = int(self.request.get('years_as_healer'))
+        h.tables_bringing = int(self.request.get('tables_bringing'))
+        h.triage = self.request.get('triage') == 'on'
+        h.preferred_time_to_heal = self.request.get('preferred_time_to_heal')
+        h.inappropriate_response = self.request.get('inappropriate_response')
+        h.suggested_qualifications = self.request.get('suggested_qualifications')
+        h.put()
         self.redirect('/register/photoupload')
 
 class PhotoUploadPage(webapp.RequestHandler):

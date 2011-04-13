@@ -1,14 +1,45 @@
-<html>
-  <head>
-    <title>Register for the HeeBeeGeeBees</title>
-    <link rel="stylesheet" type="text/css" href="/css/base.css"/>
-  </head>
+{% extends "main.html" %}
 
-  <body>
-    <form action="/register/healerinfo" method="post">
-      Placeholder!
+{% block subtitle %}
+Healer Info
+{% endblock %}
 
-      <input type="submit" value="Continue"/>
-    </form>
-  </body>
-</html>
+{% block leftnav %}
+{% endblock %}
+
+{% block content %}
+<form action="/register/healerinfo" method="post">
+  What healing modality or modalities do you wish to offer? <br/>
+  <textarea name="modalities" rows="5" cols="80"></textarea>
+
+  What certifications do you have? <br/>
+  <textarea name="certifications" rows="5" cols="80"></textarea>
+
+  <br/>Are you a professional healer?
+  <input type="checkbox" name="professional"/>
+
+  <br/>How many years have you been healing for?
+  <input type="text" name="years_as_healer"/>
+
+  <br/>How many tables are you able to bring?
+  <input type="text" name="tables_bringing"/>
+
+  <br/>I am interested in working as a triage healer
+  <input type="checkbox" name="triage"/>
+
+  <br/>What is your preferred time of day to heal?
+  <select name="preferred_time_to_heal">
+    <option value="morning">Morning</option>
+    <option value="midday">Midday</option>
+    <option value="evening">Evening</option>
+  </select>
+  
+  <br/>You see something inappropriate happen. What do you do?
+  <textarea name="inappropriate_response" rows="5" cols="80"></textarea>
+
+  <br/>What do you think minimum qualifications should be to heal?
+  <textarea name="suggested_qualifications" rows="5" cols="80"></textarea>
+
+  <input type="submit"/>
+</form>
+{% endblock %}

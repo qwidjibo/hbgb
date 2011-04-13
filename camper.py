@@ -80,3 +80,4 @@ class Camper(db.Model):
     dietary_restrictions = db.TextProperty()
 
     photo = db.BlobProperty()
+    
