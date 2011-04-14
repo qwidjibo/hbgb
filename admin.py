@@ -29,6 +29,7 @@ class CampAdminPage(webapp.RequestHandler):
         conf.year = int(self.request.get('year'))
         conf.reg_open = self.request.get('reg_open') == 'on'
         conf.reg_closed_message = self.request.get('reg_closed_message')
+        conf.location_message = self.request.get('location_message')
         conf.base_dues = int(self.request.get('base_dues'))
         conf.early_team_discount = int(self.request.get('early_team_discount'))
         conf.strike_discount = int(self.request.get('strike_discount'))
