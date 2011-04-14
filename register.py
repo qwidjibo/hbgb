@@ -15,12 +15,17 @@ import healer
 class LandingPage(webapp.RequestHandler):
     def get(self):
         conf = camp.current()
-        c = camper.Camper()
-        c.put()
-        self.response.headers.add_header('Set-Cookie', '_camper_key=%s' % (c.key()))
+        if conf.reg_open:
+            c = camper.Camper()
+            c.put()
+            self.response.headers.add_header('Set-Cookie', '_camper_key=%s' % (c.key()))
         
-        path = os.path.join(os.path.dirname(__file__), 'templates', 'reg_landing.html')
-        self.response.out.write(template.render(path, {'camp' : conf }))
+            path = os.path.join(os.path.dirname(__file__), 'templates', 'reg_landing.html')
+            self.response.out.write(template.render(path, {'camp' : conf }))
+        else:
+            path = os.path.join(os.path.dirname(__file__), 'templates', 'reg_closed.html')
+            self.response.out.write(template.render(path, {'camp' : conf }))
+            
 
     def post(self):
         camper = db.get(self.request.cookies['_camper_key'])
