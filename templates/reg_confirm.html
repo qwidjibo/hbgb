@@ -1,17 +1,14 @@
-<html>
-  <head>
-    <title>Register for the HeeBeeGeeBees</title>
-    <link rel="stylesheet" type="text/css" href="/css/base.css"/>
-  </head>
 
-  <body>
+{% extends "reg_template.html" %}
 
-    You have now registered! 
+{% block subtitle %}
+Registration Completed
+{% endblock %}
 
-    You should recieve a conformation email shortly and updates as
-    your request is processed.
+{% block content %}
+You have now registered! 
 
-  </body>
-</html>
-
+You should recieve a conformation email shortly and updates as
+your request is processed.
+{% endblock %}
 
