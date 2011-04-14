@@ -65,6 +65,21 @@ td
     width: 540px;    
 }
 
+.divRegistrationContent
+{
+    position: absolute;
+    z-index: 110;
+    top: 248px;
+    left: 120px;
+    color: black;
+    font-size: 12px;
+    line-height: 24px;
+    text-align: justify;
+    font-family: Helvetica, Arial, sans-serif;
+    text-align: left;
+    width: 709px;    
+}
+
 .divClearFloats
 {
     clear: both;
