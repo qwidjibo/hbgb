@@ -5,6 +5,7 @@ class Camp(db.Model):
     reg_open = db.BooleanProperty(required=True,
                                   default=False)
     reg_closed_message = db.TextProperty()
+    location_message = db.TextProperty()
     year = db.IntegerProperty(required=True,
                               default=1)
     base_dues = db.IntegerProperty(required=True,

@@ -1,12 +1,78 @@
 <html>
 <head>
     <title>HeeBeeGeeBee Healers - Healing Oasis at Burning Man {{ camp.year }}</title>
-    <link rel="stylesheet" type="text/css" href="/heebee_style.css">
+    <link rel="stylesheet" type="text/css" href="css/base.css">
+
+    <meta name="keywords" content="heebeegeebee healers, heebee, burning man, heebee camp, burning man theme camp, playa">
+    <meta name="description" content="HeeBeeGeeBee Healers at Burning Man provide a grounded oasis, nurturing environment and healing services for the HeeBee community, and all of Black Rock City.">
+    <meta name="robots" content="index,follow">
+    <meta name="author" content="design by Q Digital Studio www.qdigitalstudio.com, back-end by qwidjibo.org"> 
+
+    <script language=javascript>
+
+      howtobeon = new Image();
+      howtobeon.src = "images/h_button_howtobe_orange.jpg";
+      howtobeoff = new Image();
+      howtobeoff.src = "images/h_button_howtobe_yellow.jpg";
+      
+      playaon = new Image();
+      playaon.src = "images/h_button_playa_orange.jpg";
+      playaoff = new Image();
+      playaoff.src = "images/h_button_playa_yellow.jpg";
+      
+      campinfoon = new Image();
+      campinfoon.src = "images/h_button_info_orange.jpg";
+      campinfooff = new Image();
+      campinfooff.src = "images/h_button_info_yellow.jpg";
+    </script>
+
 </head>
 
 <body class="home">
 
-    <a href="main.html"> <img src="/images/homeblock.jpg" width="882" height="570" border="0" alt="HeeBeeGeeBee Healers is a grounded oasis that creates a nurturing environment and provides healing services for the HeeBeeGeeBee community, and all of Black Rock City. Our community's intention is for the healing energy we cultivate to spread into the greater world, promoting love, healing and a higher state of being for everyone."> </a>
+<div id="homecontainer"> 
+  <div id="homenavigation"> 
+    <a href="how_to_be_a_heebee.html" onMouseOver="document.alpha.src=howtobeon.src" onMouseOut="document.alpha.src=howtobeoff.src">
+      <img name="alpha" src="/images/h_button_howtobe_yellow.jpg" width="216" height="35" border="0" alt="How to be a HeeBee">
+    </a>&nbsp;&nbsp;
+    <a href="playa_offerings.html" onMouseOver="document.beta.src=playaon.src" onMouseOut="document.beta.src=playaoff.src">
+      <img name="beta" src="/images/h_button_playa_yellow.jpg" width="212" height="35" border="0" alt="Playa Offerings">
+    </a>&nbsp;&nbsp;
+    <a href="member_info.html" onMouseOver="document.gamma.src=campinfoon.src" onMouseOut="document.gamma.src=campinfooff.src">
+      <img name="gamma" src="/images/h_button_info_yellow.jpg" width="263" height="35" border="0" alt="Camp Member Information">
+    </a> 
+  </div>
+  <div id="homecontent"> 
+    <p><strong>
+	<img src="/images/homeblock.jpg" width="882" height="570" border="0" alt="HeeBeeGeeBee Healers is a grounded oasis that creates a nurturing environment and provides healing services for the HeeBeeGeeBee community, and all of Black Rock City. Our community's intention is for the healing energy we cultivate to spread into the greater world, promoting love, healing and a higher state of being for everyone."></strong><br>
+    </p>
+    <pre>&nbsp; 	</pre>
+  </div>
+  <div class="homeLinks"> 
+    {% if camp.location_message %}
+    <h2 align="center">{{ camp.year }} - {{ camp.location_message }}</h2>
+    <p>&nbsp;</p>
+    {% endif %}
+    <hr size="1" noshade width="700" color="#C4696E">
+    <a href="http://www.heebeegeebeehealers.org">HeeBeeGeeBee Healers</a> * <a href="http://www.burningman.com" target="blank">The 
+    Burning Man Project</a><br>
+    <br>
+
+    <!-- Start of StatCounter Code -->
+    <script type="text/javascript" language="javascript">
+var sc_project=701759; 
+var sc_partition=5; 
+var sc_security="762d90f6"; 
+</script>
+    <script type="text/javascript" language="javascript" src="http://www.statcounter.com/counter/counter.js"></script>
+    <noscript>
+    <a href="http://www.statcounter.com/" target="_blank"><img  src="http://c6.statcounter.com/counter.php?sc_project=701759&amp;java=0&amp;security=762d90f6" alt="counter free hit unique web" border="0"></a> 
+    </noscript>
+    <!-- End of StatCounter Code -->
+    <div style="font-size:10px; color: #ddcc66;">[unique visits since may 15 2005]</div>
+  </div>
+</div>
+
 
 </body>
 </html>
