@@ -1,0 +1,66 @@
+{% extends "reg_template.html" %}
+
+{% block subtitle %}
+Dates
+{% endblock %}
+
+{% block content %}
+<form action="/register/dates" method="post">
+
+  <div> Do you want to be on early team? You must arrive a week early and receive a ${{ camp.early_team_discount }} discount.
+    <input type="checkbox" name="early_team" />
+  </div>
+
+
+  <div> Do you want to be on strike team? You must remain on playa until the camp is completely disassembled (5PM monday). A ${{ camp.strike_team_discount}} discount is given.
+    <input type="checkbox" name="strike" />
+  </div>
+
+
+  <div> What day do you play to arrive?
+    {% for date in dates %}
+    {{ date.date }}
+    {% endfor %}
+
+
+    {% for date in early_dates %}
+    {{ date.date }}
+    {% endfor %}
+
+
+    {% for date in strike_dates %}
+    {{ date.date }}
+    {% endfor %}
+  </div>
+
+
+  <div> What time (important for meal planning)?
+    <select name="arrival_time">
+      <option value="before_breakfast">Before Breakfast</option>
+      <option value="before_lunch">Before Lunch</option>
+      <option value="before_dinner">Before Dinner</option>
+      <option value="after_dinner">After Dinner</option>
+    </select>
+  </div>
+
+
+  <div> What day do you play to leave?
+
+  </div>
+
+
+  <div> What time (also important for meal planning)?
+    <select name="departure_time">
+      <option value="before_breakfast">Before Breakfast</option>
+      <option value="before_lunch">Before Lunch</option>
+      <option value="before_dinner">Before Dinner</option>
+      <option value="after_dinner">After Dinner</option>
+    </select>
+  </div>
+
+
+  <input type="submit" value="Continue">
+</form>
+
+
+{% endblock %}
