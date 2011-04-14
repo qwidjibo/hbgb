@@ -14,6 +14,8 @@ class Camp(db.Model):
                                              default=100)
     strike_discount = db.IntegerProperty(required=True,
                                          default=50)
+    early_pay_discount = db.IntegerProperty(required=True,
+                                         default=50)
     committees = db.StringListProperty(required=True,
                                  default=[])
 

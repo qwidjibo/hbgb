@@ -1,0 +1,36 @@
+{% extends "logistics.html" %}
+
+{% block subtitle %}
+Logistics: Budget
+{% endblock %}
+
+{% block content %}
+
+<span class="h3">HBGB camp dues for {{ camp.year }}</span> are based on a graduated payment 
+    system as follows: 
+    <div class="quote"> 
+	<ul>
+	<li>${{ camp.base_dues }} Base Dues</li>
+	<li>${{ camp.early_team_discount }} Discount for early team members (arrive one week early)</li>
+	<li>${{ camp.strike_discount }} Discount for strike team members</li>
+	<li>${{ camp.early_pay_discount }} Discount for paying before April 30th</li>
+	</ul>
+      </div> 
+    <p>Your camp fees include all your meals and water, as well as general camp expenses. 
+      Fees do not include the cost of your Burning Man ticket.</p> 
+    <p><br> 
+      <br> 
+      <span class="h3">Make checks payable to: Scott Roy</span> </p> 
+    <div class="quote"> All checks should be sent to:<br> 
+      HeeBeeGeeBee Healers<br> 
+      P.O. Box 19693<br> 
+      Boulder, CO 80308</div> 
+    <br> 
+    <span class="h3">Payment Plans ~</span> are available if needed. Please contact 
+    <script language="JavaScript">eval(unescape('%64%6f%63%75%6d%65%6e%74%2e%77%72%69%74%65%28%27%3c%61%20%68%72%65%66%3d%22%6d%61%69%6c%74%6f%3a%73%63%6f%6f%74%65%72%38%30%33%30%32%40%79%61%68%6f%6f%2e%63%6f%6d%22%3e%53%63%6f%6f%74%65%72%3c%2f%61%3e%27%29'))</script>    for more information. <br> 
+<!--    <span class="h3">Scholarships ~</span> Read about <a href="scholarship.php">HeeBee 
+    Scholarship</a> opportunities. <br> -->
+    <span class="h3">Questions ~</span> If you have questions, contact 
+    <script language="JavaScript">eval(unescape('%64%6f%63%75%6d%65%6e%74%2e%77%72%69%74%65%28%27%3c%61%20%68%72%65%66%3d%22%6d%61%69%6c%74%6f%3a%73%63%6f%6f%74%65%72%38%30%33%30%32%40%79%61%68%6f%6f%2e%63%6f%6d%22%3e%53%63%6f%6f%74%65%72%3c%2f%61%3e%27%29'))</script>    . <br> 
+
+{% endblock %}

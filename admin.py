@@ -33,6 +33,7 @@ class CampAdminPage(webapp.RequestHandler):
         conf.base_dues = int(self.request.get('base_dues'))
         conf.early_team_discount = int(self.request.get('early_team_discount'))
         conf.strike_discount = int(self.request.get('strike_discount'))
+        conf.early_pay_discount = int(self.request.get('early_pay_discount'))
         conf.put()
         self.redirect('/admin/camp')
 
