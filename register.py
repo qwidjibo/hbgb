@@ -179,6 +179,8 @@ class ConfirmationPage(webapp.RequestHandler):
     def get(self):
         conf = camp.current()
         camper = db.get(self.request.cookies['_camper_key'])
+        camper.status = 'registered'
+        camper.put()
         path = os.path.join(os.path.dirname(__file__), 'templates', 'reg_confirm.html')
         self.response.out.write(template.render(path, { 'camper' : camper, 'camp' : conf }))
         mail.send_mail(sender=conf.reg_email_from,

@@ -8,7 +8,10 @@ class Camper(db.Model):
         required=True,
         choices=[
             'new',
-            'registered'
+            'registered',
+            'accepted',
+            'rejected',
+            'waitlisted'
             ],
         default='new')
     realname = db.StringProperty()

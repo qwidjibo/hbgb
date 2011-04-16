@@ -11,6 +11,7 @@ from google.appengine.ext.webapp.util import run_wsgi_app
 
 import camp
 import campdate
+import camper
 
 class LandingPage(webapp.RequestHandler):
     def get(self):
@@ -39,6 +40,45 @@ class CampAdminPage(webapp.RequestHandler):
         conf.reg_email_body = self.request.get('reg_email_body')
         conf.put()
         self.redirect('/admin/camp')
+
+class CampersAdminPage(webapp.RequestHandler):
+    def get(self):
+        path = os.path.join(os.path.dirname(__file__), 'templates', 'admin_campers.html')
+        conf = camp.current()
+        campers = db.GqlQuery('SELECT * FROM Camper')
+        registered_campers = []
+        accepted_campers = []
+        waitlisted_campers = []
+        rejected_campers = []
+        for camper in campers:
+            logging.error(camper.status)
+            if camper.status == 'registered':
+                logging.error('got ' + camper.status)
+                registered_campers.append(camper)
+            if camper.status == 'accepted':
+                logging.error('got ' + camper.status)
+                accepted_campers.append(camper)
+            if camper.status == 'rejected':
+                logging.error('got ' + camper.status)
+                rejected_campers.append(camper)
+            if camper.status == 'waitlisted':
+                logging.error('got ' + camper.status)
+                waitlisted_campers.append(camper)            
+
+        self.response.out.write(template.render(path, {'conf' : conf, 
+                                                       'registered_campers' : registered_campers,
+                                                       'accepted_campers' : accepted_campers,
+                                                       'rejected_campers' : rejected_campers,
+                                                       'waitlisted_campers' : waitlisted_campers
+                                                       }))
+
+class CamperEditStatusFormSubmit(webapp.RequestHandler):
+    def post(self):
+        conf = camp.current()
+        camper = db.get(self.request.get('key'))
+        camper.status = self.request.get('status')
+        camper.put()        
+        self.redirect('/admin/campers')
 
 class DateAddFormSubmit(webapp.RequestHandler):
     def post(self):
@@ -86,6 +126,8 @@ application = webapp.WSGIApplication(
     [
         ('/admin', LandingPage),
         ('/admin/camp', CampAdminPage),
+        ('/admin/campers', CampersAdminPage),
+        ('/admin/camper/editstatus', CamperEditStatusFormSubmit),
         ('/admin/dates/add', DateAddFormSubmit),
         ('/admin/dates/edit', DateEditFormSubmit),
         ('/admin/dates/delete', DateDeleteFormSubmit),
