@@ -48,6 +48,24 @@
 	<input type="submit" value="Save">
       </div>
 
+      <h2> Registraion Email </h2>
+
+      Configure the email sent when a user finishes registration.
+
+      <div> From:
+	<input type="text" size=60 name="reg_email_from" value="{{ conf.reg_email_from }}" />
+      </div>
+      <div> Subject:
+	<input type="text" size=120 name="reg_email_subject" value="{{ conf.reg_email_subject }}" />
+      </div>
+      <div> Body:
+	<textarea rows=5 cols=60 name="reg_email_body" value="{{ conf.reg_email_body }}">{{ conf.reg_email_body }}</textarea>
+      </div>
+
+      <div>
+	<input type="submit" value="Save">
+      </div>
+
     </form>
 
     <h2> Committees </h2>

@@ -34,6 +34,9 @@ class CampAdminPage(webapp.RequestHandler):
         conf.early_team_discount = int(self.request.get('early_team_discount'))
         conf.strike_discount = int(self.request.get('strike_discount'))
         conf.early_pay_discount = int(self.request.get('early_pay_discount'))
+        conf.reg_email_from = self.request.get('reg_email_from')
+        conf.reg_email_subject = self.request.get('reg_email_subject')
+        conf.reg_email_body = self.request.get('reg_email_body')
         conf.put()
         self.redirect('/admin/camp')
 

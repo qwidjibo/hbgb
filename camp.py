@@ -19,6 +19,10 @@ class Camp(db.Model):
     committees = db.StringListProperty(required=True,
                                  default=[])
 
+    reg_email_from = db.StringProperty()
+    reg_email_subject = db.StringProperty()
+    reg_email_body = db.TextProperty()
+
 def current():
     camp = db.GqlQuery('SELECT * FROM Camp').get()
     if camp is None:

@@ -2,6 +2,7 @@ import cgi
 import os
 import Cookie
 
+from google.appengine.api import mail
 from google.appengine.api import users
 from google.appengine.ext import db
 from google.appengine.ext import webapp
@@ -169,7 +170,8 @@ class PhotoUploadPage(webapp.RequestHandler):
 
     def post(self):
         camper = db.get(self.request.cookies['_camper_key'])
-        camper.photo = db.Blob(self.request.get("photo"))
+        if self.request.get("photo") is '':
+          camper.photo = db.Blob(self.request.get("photo"))
         camper.put()
         self.redirect('/register/confirm')
 
@@ -179,6 +181,10 @@ class ConfirmationPage(webapp.RequestHandler):
         camper = db.get(self.request.cookies['_camper_key'])
         path = os.path.join(os.path.dirname(__file__), 'templates', 'reg_confirm.html')
         self.response.out.write(template.render(path, { 'camper' : camper, 'camp' : conf }))
+        mail.send_mail(sender=conf.reg_email_from,
+                       to=camper.email,
+                       subject=conf.reg_email_subject,
+                       body=conf.reg_email_body)
         
 application = webapp.WSGIApplication(
     [
