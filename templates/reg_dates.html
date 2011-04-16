@@ -12,25 +12,20 @@ Dates
   </div>
 
 
-  <div> Do you want to be on strike team? You must remain on playa until the camp is completely disassembled (5PM monday). A ${{ camp.strike_team_discount}} discount is given.
+  <div> Do you want to be on strike team? You must remain on playa until the camp is completely disassembled (5PM monday). A ${{ camp.strike_discount}} discount is given.
     <input type="checkbox" name="strike" />
   </div>
 
 
   <div> What day do you play to arrive?
-    {% for date in dates %}
-    {{ date.date }}
-    {% endfor %}
-
-
-    {% for date in early_dates %}
-    {{ date.date }}
-    {% endfor %}
-
-
-    {% for date in strike_dates %}
-    {{ date.date }}
-    {% endfor %}
+    <select name='arrival_date'>
+      {% for date in early_dates %}
+      <option value='{{ date.date }}'>{{date.date}} (Early Team Only)</option>
+      {% endfor %}
+      {% for date in dates %}
+      <option value='{{ date.date }}'>{{date.date}}</option>
+      {% endfor %}
+    </select>
   </div>
 
 
@@ -45,7 +40,11 @@ Dates
 
 
   <div> What day do you play to leave?
-
+    <select name='departure_date'>
+      {% for date in dates %}
+      <option value='{{ date.date }}'>{{date.date}}</option>
+      {% endfor %}
+    </select>
   </div>
 
 
