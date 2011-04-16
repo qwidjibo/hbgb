@@ -9,17 +9,30 @@ Healer Info
   What healing modality or modalities do you wish to offer? <br/>
   <textarea name="modalities" rows="5" cols="80"></textarea>
 
-  What certifications do you have? <br/>
+  <br/>What certifications do you have? <br/>
   <textarea name="certifications" rows="5" cols="80"></textarea>
 
   <br/>Are you a professional healer?
   <input type="checkbox" name="professional"/>
 
   <br/>How many years have you been healing for?
-  <input type="text" name="years_as_healer"/>
+  <select name="years_as_healer">
+    <option value='0'>Less than 1</option>
+    <option value='1'>1</option>
+    <option value='2'>2</option>
+    <option value='3'>3</option>
+    <option value='4'>4</option>
+    <option value='5'>5+</option>
+    <option value='10'>10+</option>
+  </select>
 
   <br/>How many tables are you able to bring?
-  <input type="text" name="tables_bringing"/>
+  <select name="tables_bringing">
+    <option value='0'>None</option>
+    <option value='1'>1</option>
+    <option value='2'>2</option>
+    <option value='3'>3+</option>
+  </select>
 
   <br/>I am interested in working as a triage healer
   <input type="checkbox" name="triage"/>
@@ -31,12 +44,12 @@ Healer Info
     <option value="evening">Evening</option>
   </select>
   
-  <br/>You see something inappropriate happen. What do you do?
-  <textarea name="inappropriate_response" rows="5" cols="80"></textarea>
+  <br/>You are working in the healing space and see something you consider inappropriate happening on the table next to yours. How do you react/respond?
+  <br/><textarea name="inappropriate_response" rows="5" cols="80"></textarea>
 
-  <br/>What do you think minimum qualifications should be to heal?
+  <br/>What do you think the minimum qualifications should be to heal in the heebee space should be?
   <textarea name="suggested_qualifications" rows="5" cols="80"></textarea>
 
-  <input type="submit"/>
+  <br/><input type="submit"/>
 </form>
 {% endblock %}
