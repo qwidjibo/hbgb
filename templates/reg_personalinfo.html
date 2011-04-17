@@ -35,12 +35,14 @@ Personal Info
     <textarea name="why_heebees" rows="10" cols ="80"></textarea>
   </div>
 
+{% if not camper.returning %}
   <div>
     <h4>Story Time</h4>
 You open your eyes and wipe the dust off your face. A quick cough next to you starts to bring back flashes of last night. You remember dancing in the pink panties pagoda to Lorin Bassnectar. You thought you were dreaming. Then the most amazing person comes up and wants you to follow them. You hear someone question you, "Who are you camping with?" Of course, you say that you are a HeeBee. Your guide turns and shoots you a huge smile. Where am I going, you think. Then you duck under a pink taffeta cloth and have to get on your knees in order to crawl through a tight pink tunnel. The dust makes you sneeze. Some one laughs and you hurry up. You realize that your memories get a little fuzzy from there. You need to stretch. So you try to get up but your arm is quite numb. Looking to your left you see a big bundle of pink sleeping on your arm. The pink cloth starts to rustle and...:
     <h4>What Happens Next, And What Do You Do?</h4>
     <textarea name="story" rows="10" cols="80"></textarea>
   </div>
+{% endif %}
 
   <div><input type="submit" value="Continue" /></div>
 </form>

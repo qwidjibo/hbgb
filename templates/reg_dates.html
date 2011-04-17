@@ -7,12 +7,12 @@ Dates
 {% block content %}
 <form action="/register/dates" method="post">
 
-  <div> Do you want to be on early team? You must arrive a week early and receive a ${{ camp.early_team_discount }} discount.
+  <div> Do you want to be on early team? You must arrive a week early and receive a ${{ camp.early_team_discount }} rebate.
     <input type="checkbox" name="early_team" />
   </div>
 
 
-  <div> Do you want to be on strike team? You must remain on playa until the camp is completely disassembled (5PM monday). A ${{ camp.strike_discount}} discount is given.
+  <div> Do you want to be on strike team? You must remain on playa until the camp is completely disassembled (5PM monday). A ${{ camp.strike_discount}} rebate is given.
     <input type="checkbox" name="strike" />
   </div>
 
@@ -20,10 +20,14 @@ Dates
   <div> What day do you play to arrive?
     <select name='arrival_date'>
       {% for date in early_dates %}
-      <option value='{{ date.date }}'>{{date.date}} (Early Team Only)</option>
+      <option value='{{ date.date }}'>{{date.date}} 
+	{% if date.desc %}({{date.desc}}){% endif %}
+      </option>
       {% endfor %}
       {% for date in dates %}
-      <option value='{{ date.date }}'>{{date.date}}</option>
+      <option value='{{ date.date }}'>{{date.date}} 
+	{% if date.desc %}({{date.desc}}){% endif %}
+      </option>
       {% endfor %}
     </select>
   </div>
@@ -39,10 +43,12 @@ Dates
   </div>
 
 
-  <div> What day do you play to leave?
+  <div> What day do you plan to leave?
     <select name='departure_date'>
       {% for date in dates %}
-      <option value='{{ date.date }}'>{{date.date}}</option>
+      <option value='{{ date.date }}'>{{date.date}} 
+	{% if date.desc %}({{date.desc}}){% endif %}
+      </option>
       {% endfor %}
     </select>
   </div>
