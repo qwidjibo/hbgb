@@ -122,12 +122,42 @@ class CommitteeDeleteFormSubmit(webapp.RequestHandler):
         conf.put()        
         self.redirect('/admin/camp')
 
+class CommitteeAssignmentPage(webapp.RequestHandler):
+    def get(self):
+        path = os.path.join(os.path.dirname(__file__), 'templates', 'admin_committee_assignments.html')
+        conf = camp.current()
+        campers = db.GqlQuery('SELECT * FROM Camper WHERE status=\'accepted\'')
+        unassigned_campers = []
+        assigned_campers = {}
+        for committee in conf.committees:
+            assigned_campers[committee] = []
+        for camper in campers:
+            if not camper.assigned_committee:
+                unassigned_campers.append(camper)
+            else:
+                assigned_campers[camper.assigned_committee].append(camper)
+
+        template_vars = { 'conf' : conf,
+                          'unassigned_campers' : unassigned_campers,
+                          'assigned_campers' : assigned_campers}
+#        for (committee, campers) in assigned_campers.items();
+#          template_vars[committee] = campers
+        self.response.out.write(template.render(path, template_vars))
+
+    def post(self):
+        conf = camp.current()
+        camper = db.get(self.request.get('key'))
+        camper.assigned_committee = self.request.get('assigned_committee')
+        camper.put()        
+        self.redirect('/admin/committeeassigner')
+
+
 application = webapp.WSGIApplication(
     [
         ('/admin', LandingPage),
         ('/admin/camp', CampAdminPage),
         ('/admin/campers', CampersAdminPage),
-        ('/admin/camper/editstatus', CamperEditStatusFormSubmit),
+        ('/admin/committeeassigner', CommitteeAssignmentPage),
         ('/admin/dates/add', DateAddFormSubmit),
         ('/admin/dates/edit', DateEditFormSubmit),
         ('/admin/dates/delete', DateDeleteFormSubmit),

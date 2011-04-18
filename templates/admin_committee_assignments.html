@@ -1,0 +1,49 @@
+<html>
+  <head>
+    <title>Admin Campers</title>
+    <link rel="stylesheet" type="text/css" href="/css/base.css"/>
+  </head>
+
+  <body>
+    <p><a href="/admin">Back to the main admin page</a></p>
+
+    <h3>Unassigned Campers</h3>
+
+    {% for camper in unassigned_campers %}
+    <form action="/admin/committeeassigner" method="post">
+      <input type="hidden" name="key" value="{{ camper.key }}"/>
+      {{ camper.realname }} - {{ camper.email }} <br/>
+      First Choice Committee: {{ camper.first_choice_committee }} <br/>
+      <div class="quote"> {{ camper.first_choice_reason }} </div> <br/>
+      Second Choice Committee: {{ camper.second_choice_committee }} <br/>
+      <div class="quote"> {{ camper.second_choice_reason }} </div> <br/>
+      Assignment:
+      <select name="assigned_committee">
+      {% for committee in conf.committees %}
+      <option value="{{committee}}">{{committee}}</option>
+      {% endfor %}
+      </select>
+      <input type="submit" action="/admin/committeeassigner" value="Do It!"/>
+    </form>
+    {% endfor %}
+
+    {% for committee in assigned_campers.items %}
+    <h3>{{committee.0}}</h3>
+    {% for camper in committee.1 %}
+    <form action="/admin/committeeassigner" method="post">
+      <input type="hidden" name="key" value="{{ camper.key }}"/>
+      {{ camper.realname }} - {{ camper.email }}
+      <select name="assigned_committee">
+	<option/>
+	{% for committee in conf.committees %}
+	<option value="{{committee}}">{{committee}}</option>
+	{% endfor %}
+      </select>
+      <input type="submit" action="/admin/committeeassigner" value="Reassign"/>
+    </form>
+    {% endfor %}
+    {% endfor %}
+
+
+  </body>	  
+</html>

@@ -28,6 +28,7 @@ class Camper(db.Model):
     why_heebees = db.TextProperty()
     story = db.TextProperty()
     
+    assigned_committee = db.StringProperty()
     first_choice_committee = db.StringProperty()
     second_choice_committee = db.StringProperty()
     first_choice_reason = db.TextProperty()
