@@ -21,7 +21,8 @@ class Healer(db.Model):
           choices = [
             'morning',
             'midday',
-            'afternoon'
+            'afternoon',
+            'evening'
           ])
     inappropriate_response = db.TextProperty()
     suggested_qualifications = db.TextProperty()
