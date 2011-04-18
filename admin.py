@@ -157,6 +157,7 @@ application = webapp.WSGIApplication(
         ('/admin', LandingPage),
         ('/admin/camp', CampAdminPage),
         ('/admin/campers', CampersAdminPage),
+        ('/admin/camper/editstatus', CamperEditStatusFormSubmit),
         ('/admin/committeeassigner', CommitteeAssignmentPage),
         ('/admin/dates/add', DateAddFormSubmit),
         ('/admin/dates/edit', DateEditFormSubmit),
