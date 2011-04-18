@@ -87,20 +87,20 @@ class PlayaInfoPage(webapp.RequestHandler):
         camper.arrival_time = self.request.get('arrival_time')
         camper.departure_time = self.request.get('departure_time')
         camper.transportation_means = self.request.get('transportation_means')
-        bringing_rv = self.request.get('bringing_rv')
-        rv_hookup = self.request.get('rv_hookup')
-        rv_info = self.request.get('rv_info')
-        dorm_tent = self.request.get('dorm_tent') == 'on'
-        structure_info = self.request.get('structure_info')
-        food_type = self.request.get('food_type')
-        eats_beef = self.request.get('eats_beef') == 'on'
-        eats_chicken = self.request.get('eats_chicken') == 'on'
-        eats_pork = self.request.get('eats_pork') == 'on'
-        eats_bacon = self.request.get('eats_bacon') == 'on'
-        eats_fish = self.request.get('eats_fish') == 'on'
-        eats_tofu = self.request.get('eats_tofu') == 'on'
-        eats_human = self.request.get('eats_human') == 'on'
-        dietary_restrictions = self.request.get('dietary_restrictions')
+        camper.bringing_rv = self.request.get('bringing_rv')
+        camper.rv_hookup = self.request.get('rv_hookup')
+        camper.rv_info = self.request.get('rv_info')
+        camper.dorm_tent = self.request.get('dorm_tent') == 'on'
+        camper.structure_info = self.request.get('structure_info')
+        camper.food_type = self.request.get('food_type')
+        camper.eats_beef = self.request.get('eats_beef') == 'on'
+        camper.eats_chicken = self.request.get('eats_chicken') == 'on'
+        camper.eats_pork = self.request.get('eats_pork') == 'on'
+        camper.eats_bacon = self.request.get('eats_bacon') == 'on'
+        camper.eats_fish = self.request.get('eats_fish') == 'on'
+        camper.eats_tofu = self.request.get('eats_tofu') == 'on'
+        camper.eats_human = self.request.get('eats_human') == 'on'
+        camper.dietary_restrictions = self.request.get('dietary_restrictions')
         camper.put()
 
         self.redirect('/register/dates')
