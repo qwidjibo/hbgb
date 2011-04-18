@@ -11,8 +11,8 @@ class Healer(db.Model):
             'accepted',
             'rejected'
           ])
-    modalities = db.StringProperty()
-    certifications = db.StringProperty()
+    modalities = db.TextProperty()
+    certifications = db.TextProperty()
     professional = db.BooleanProperty()
     years_as_healer = db.IntegerProperty()
     tables_bringing = db.IntegerProperty()
@@ -23,6 +23,6 @@ class Healer(db.Model):
             'midday',
             'afternoon'
           ])
-    inappropriate_response = db.StringProperty()
-    suggested_qualifications = db.StringProperty()
+    inappropriate_response = db.TextProperty()
+    suggested_qualifications = db.TextProperty()
    
