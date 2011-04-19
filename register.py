@@ -87,8 +87,8 @@ class PlayaInfoPage(webapp.RequestHandler):
         camper.arrival_time = self.request.get('arrival_time')
         camper.departure_time = self.request.get('departure_time')
         camper.transportation_means = self.request.get('transportation_means')
-        camper.bringing_rv = self.request.get('bringing_rv')
-        camper.rv_hookup = self.request.get('rv_hookup')
+        camper.bringing_rv = self.request.get('bringing_rv') == 'on'
+        camper.rv_hookup = self.request.get('rv_hookup') == 'on'
         camper.rv_info = self.request.get('rv_info')
         camper.dorm_tent = self.request.get('dorm_tent') == 'on'
         camper.structure_info = self.request.get('structure_info')
