@@ -1,0 +1,65 @@
+
+{% extends "reg_template.html" %}
+
+{% block subtitle %}
+Edit User Info
+{% endblock %}
+
+{% block content %}
+<form action="/camper/edit" method="post">
+
+  <input type="hidden" name="camper_key" value="{{camper.key}}"/>
+
+  <h2> Personal Info </h2>
+
+  Real Name <input name="realname" type="text" size="30" value="{{camper.realname}}"/> <br/>
+  Playa Name <input name="playaname" type="text" size="30" value="{{camper.playaname}}"/> <br/>
+  Email <input name="email" type="text" size="30" value="{{camper.email}}"/> <br/>
+  Returning HeeBee
+
+
+  <input type="submit" action="/camper/edit"/ value="Save"/>
+
+
+  <input type="hidden" name="email" value="{{camper.email}}"/>
+  <input type="hidden" name="address" value="{{camper.address}}"/>
+  <input type="hidden" name="returning" value="{% if camper.returning %}on{% else %}off{% endif %}"/>
+  <input type="hidden" name="years_as_heebee" value="{{camper.years_as_heebee}}"/>
+  <input type="hidden" name="previous_camps" value="{{camper.previous_camps}}"/>
+  <input type="hidden" name="default_world_job" value="{{camper.default_world_job}}"/>
+  <input type="hidden" name="why_heebees" value="{{camper.why_heebees}}"/>
+  <input type="hidden" name="story" value="{{camper.story}}"/>
+  <input type="hidden" name="assigned_committee" value="{{camper.assigned_committee}}"/>
+  <input type="hidden" name="first_choice_committee" value="{{camper.first_choice_committee}}"/>
+  <input type="hidden" name="second_choice_committee" value="{{camper.second_choice_committee}}"/>
+  <input type="hidden" name="first_choice_reason" value="{{camper.first_choice_reason}}"/>
+  <input type="hidden" name="second_choice_reason" value="{{camper.second_choice_reason}}"/>
+  <input type="hidden" name="wants_to_heal" value="{{camper.wants_to_heal}}"/>
+  <input type="hidden" name="wants_to_lead" value="{{camper.wants_to_lead}}"/>
+  <input type="hidden" name="teaching_info" value="{{camper.teaching_info}}"/>
+  <input type="hidden" name="early_team" value="{% if camper.early_team %}on{% else %}off{% endif %}"/>
+  <input type="hidden" name="strike" value="{% if camper.strike %}on{% else %}off{% endif %}"/>
+  <input type="hidden" name="arrival_date" value="{{camper.arrival_date}}"/>
+  <input type="hidden" name="departure_date" value="{{camper.departure_date}}"/>
+  <input type="hidden" name="arrival_time" value="{{camper.arrival_time}}"/>
+  <input type="hidden" name="departure_time" value="{{camper.departure_time}}"/>
+  <input type="hidden" name="transportation_means" value="{{camper.transportation_means}}"/>
+  <input type="hidden" name="bringing_rv" value="{% if camper.bringing_rv %}on{% else %}off{% endif %}"/>
+  <input type="hidden" name="rv_hookup" value="{% if camper.rv_hookup %}on{% else %}off{% endif %}"/>
+  <input type="hidden" name="rv_info" value="{{camper.rv_info}}"/>
+  <input type="hidden" name="dorm_tent" value="{% if camper.dorm_tent %}on{% else %}off{% endif %}"/>
+  <input type="hidden" name="structure_info" value="{{camper.structure_info}}"/>
+  <input type="hidden" name="food_type" value="{{camper.food_type}}"/>
+  <input type="hidden" name="eats_beef" value="{% if camper.eats_beef %}on{% else %}off{% endif %}"/>
+  <input type="hidden" name="eats_chicken" value="{% if camper.eats_chicken %}on{% else %}off{% endif %}"/>
+  <input type="hidden" name="eats_pork" value="{% if camper.eats_pork %}on{% else %}off{% endif %}"/>
+  <input type="hidden" name="eats_bacon" value="{% if camper.eats_bacon %}on{% else %}off{% endif %}"/>
+  <input type="hidden" name="eats_fish" value="{% if camper.eats_fish %}on{% else %}off{% endif %}"/>
+  <input type="hidden" name="eats_tofu" value="{% if camper.eats_tofu %}on{% else %}off{% endif %}"/>
+  <input type="hidden" name="eats_human" value="{% if camper.eats_human %}on{% else %}off{% endif %}"/>
+  <input type="hidden" name="dietary_restriction" value="{{camper.dietary_restriction}}"/>
+  <input type="hidden" name="photo" value="{{camper.photo}}"/>
+</form>
+
+
+{% endblock %}

@@ -16,6 +16,9 @@ handlers:
 - url: /admin.*
   script: admin.py
 
+- url: /camper.*
+  script: camper_app.py
+
 - url: /
   script: static.py
 
