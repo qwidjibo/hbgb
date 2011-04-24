@@ -12,13 +12,17 @@ from google.appengine.ext.webapp.util import run_wsgi_app
 import camp
 import campdate
 import camper
+import healer
 
 class CamperEditForm(webapp.RequestHandler):
     def get(self):
         path = os.path.join(os.path.dirname(__file__), 'templates', 'edit_camper.html')
         conf = camp.current()
 	camper = db.get(self.request.get('camper_key'))
-        self.response.out.write(template.render(path, {'conf' : conf, 'camper' : camper}))
+	healer = None
+ 	for h in camper.healer_set:
+  	  healer = h	
+        self.response.out.write(template.render(path, {'conf' : conf, 'camper' : camper, 'healer' : healer}))
 
     def post(self):
 	logging.info('"'+self.request.get('camper_key')+'"')		
@@ -63,6 +67,19 @@ class CamperEditForm(webapp.RequestHandler):
 	camper.eats_human = self.request.get('eats_human') == 'on'
 	camper.dietary_restrictions = self.request.get('dietary_restrictions')
     	camper.put()
+	if self.request.get('healer_key'):
+	  healer = db.get(self.request.get('healer_key'))
+	  healer.modalities = self.request.get('modalities')
+	  healer.certifications = self.request.get('certifications')
+	  healer.professional = self.request.get('professional') == 'on'
+	  healer.years_as_healer = int(self.request.get('years_as_healer'))
+	  healer.tables_bringing = int(self.request.get('tables_bringing'))
+	  healer.triage = self.request.get('triage') == 'on'
+	  healer.preferred_time_to_heal = self.request.get('preferred_time_to_heal')
+	  healer.inappropriate_response = self.request.get('inappropriate_response')
+	  healer.suggested_qualifications = self.request.get('suggested_qualifications')
+	  healer.put()
+	
 	self.redirect('/camper/edit?camper_key=' + self.request.get('camper_key'))
 
 application = webapp.WSGIApplication(

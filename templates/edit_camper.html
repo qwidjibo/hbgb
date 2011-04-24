@@ -26,7 +26,21 @@ Edit User Info
   Why Heebees <br/> <textarea name="why_heebees" rows=4 cols=80>{{camper.why_heebees}}</textarea> <br/>
   Story <br/> <textarea name="story" rows=4 cols=80>{{camper.story}}</textarea></br>
 
+<h2> Healer Info </h2>
 
+  Wants to Heal <input name="wants_to_heal" type="checkbox" {% if camper.wants_to_heal %} checked {% endif %}/> <br/>
+
+    <input type="hidden" name="healer_key" value="{{healer.key}}"/>
+    Modalities <br/> <textarea name="modalities" rows=4 cols=80>{{healer.modalities}}</textarea> <br/>
+    Certifications <br/> <textarea name="certifications" rows=4 cols=80>{{healer.certifications}}</textarea> <br/>
+    Response to Inappropriate Action <br/> <textarea name="inappropriate_response" rows=4 cols=80>{{healer.inappropriate_response}}</textarea> <br/>
+    Suggested Qualifications for a Healer <br/> <textarea name="suggested_qualifications" rows=4 cols=80>{{healer.suggested_qualifications}}</textarea> <br/>
+    Years As Healer <input name="years_as_healer" type="text" size=10 value="{{healer.years_as_healer}}" /> <br/>
+    Professional <input name="professional" type="checkbox" {% if healer.professional %} checked {% endif %} /> <br/>
+    Triage <input name="triage" type="checkbox" {% if healer.triage %} checked {% endif %} /> <br/>
+    Tables Bringing <input name="tables_bringing" type="text" size=10 value="{{healer.tables_bringing}}" /> <br/>
+    <input type="hidden" name="preferred_time_to_heal" value="{{preferred_time_to_heal}}"/>
+  
   <input type="submit" action="/camper/edit"/ value="Save"/>
 
   <input type="hidden" name="assigned_committee" value="{{camper.assigned_committee}}"/>
@@ -34,7 +48,6 @@ Edit User Info
   <input type="hidden" name="second_choice_committee" value="{{camper.second_choice_committee}}"/>
   <input type="hidden" name="first_choice_reason" value="{{camper.first_choice_reason}}"/>
   <input type="hidden" name="second_choice_reason" value="{{camper.second_choice_reason}}"/>
-  <input type="hidden" name="wants_to_heal" value="{{camper.wants_to_heal}}"/>
   <input type="hidden" name="wants_to_lead" value="{{camper.wants_to_lead}}"/>
   <input type="hidden" name="teaching_info" value="{{camper.teaching_info}}"/>
   <input type="hidden" name="early_team" value="{% if camper.early_team %}on{% else %}off{% endif %}"/>
