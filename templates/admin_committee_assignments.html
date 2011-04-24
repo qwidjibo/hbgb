@@ -12,7 +12,7 @@
     {% for camper in unassigned_campers %}
     <form action="/admin/committeeassigner" method="post">
       <input type="hidden" name="key" value="{{ camper.key }}"/>
-      {{ camper.realname }} - {{ camper.email }} <br/>
+      <a href="/camper/edit?camper_key={{ camper.key }}">{{ camper.realname }} - {{ camper.email }}</a><br/> 
       First Choice Committee: {{ camper.first_choice_committee }} <br/>
       <div class="quote"> {{ camper.first_choice_reason }} </div> <br/>
       Second Choice Committee: {{ camper.second_choice_committee }} <br/>
@@ -32,7 +32,7 @@
     {% for camper in committee.1 %}
     <form action="/admin/committeeassigner" method="post">
       <input type="hidden" name="key" value="{{ camper.key }}"/>
-      {{ camper.realname }} - {{ camper.email }}
+      <a href="/camper/edit?camper_key={{ camper.key }}">{{ camper.realname }} - {{ camper.email }}</a> 
       <select name="assigned_committee">
 	<option/>
 	{% for committee in conf.committees %}
