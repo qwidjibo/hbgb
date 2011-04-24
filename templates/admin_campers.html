@@ -28,7 +28,7 @@
     {% for camper in accepted_campers %}
     <form action="/admin/camper/editstatus" method="post">
       <input type="hidden" name="key" value="{{ camper.key }}"/>
-      {{ camper.realname }} - {{ camper.email }} 
+      <a href="/camper/edit?camper_key={{ camper.key }}">{{ camper.realname }} - {{ camper.email }}</a> 
       <select name="status">
 	<option></option>
 	<option value='accepted'>Accept</option>
@@ -45,7 +45,7 @@
     {% for camper in waitlisted_campers %}
     <form action="/admin/camper/editstatus" method="post">
       <input type="hidden" name="key" value="{{ camper.key }}"/>
-      {{ camper.realname }} - {{ camper.email }} 
+      <a href="/camper/edit?camper_key={{ camper.key }}">{{ camper.realname }} - {{ camper.email }}</a> 
       <select name="status">
 	<option></option>
 	<option value='accepted'>Accept</option>
@@ -62,7 +62,7 @@
     {% for camper in rejected_campers %}
     <form action="/admin/camper/editstatus" method="post">
       <input type="hidden" name="key" value="{{ camper.key }}"/>
-      {{ camper.realname }} - {{ camper.email }} 
+      <a href="/camper/edit?camper_key={{ camper.key }}">{{ camper.realname }} - {{ camper.email }}</a> 
       <select name="status">
 	<option></option>
 	<option value='accepted'>Accept</option>
