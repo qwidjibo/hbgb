@@ -15,20 +15,20 @@ Edit User Info
   Real Name <input name="realname" type="text" size="30" value="{{camper.realname}}"/> <br/>
   Playa Name <input name="playaname" type="text" size="30" value="{{camper.playaname}}"/> <br/>
   Email <input name="email" type="text" size="30" value="{{camper.email}}"/> <br/>
-  Returning HeeBee
+  Address <br/> <textarea name="address" rows=4 cols=80>{{camper.address}}</textarea> <br/>
+  Default World Job <br/> <textarea name="default_world_job" rows=4 cols=80>{{camper.default_world_job}} </textarea> </br>
+
+<h2> Application Info </h2>
+
+  Returning HeeBee <input name="returning" type="checkbox" {% if camper.returning %} checked {% endif %}/> <br/>
+  Years As HeeBee <input name="years_as_heebee" type="text" size="30" value="{{camper.years_as_heebee}}"/> <br/>
+  Previous Camps <br/> <textarea name="previous_camps" rows=4 cols=80>{{camper.previous_camps}}</textarea> <br/> 
+  Why Heebees <br/> <textarea name="why_heebees" rows=4 cols=80>{{camper.why_heebees}}</textarea> <br/>
+  Story <br/> <textarea name="story" rows=4 cols=80>{{camper.story}}</textarea></br>
 
 
   <input type="submit" action="/camper/edit"/ value="Save"/>
 
-
-  <input type="hidden" name="email" value="{{camper.email}}"/>
-  <input type="hidden" name="address" value="{{camper.address}}"/>
-  <input type="hidden" name="returning" value="{% if camper.returning %}on{% else %}off{% endif %}"/>
-  <input type="hidden" name="years_as_heebee" value="{{camper.years_as_heebee}}"/>
-  <input type="hidden" name="previous_camps" value="{{camper.previous_camps}}"/>
-  <input type="hidden" name="default_world_job" value="{{camper.default_world_job}}"/>
-  <input type="hidden" name="why_heebees" value="{{camper.why_heebees}}"/>
-  <input type="hidden" name="story" value="{{camper.story}}"/>
   <input type="hidden" name="assigned_committee" value="{{camper.assigned_committee}}"/>
   <input type="hidden" name="first_choice_committee" value="{{camper.first_choice_committee}}"/>
   <input type="hidden" name="second_choice_committee" value="{{camper.second_choice_committee}}"/>
