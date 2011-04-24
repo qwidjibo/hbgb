@@ -135,7 +135,10 @@ class CommitteeAssignmentPage(webapp.RequestHandler):
             if not camper.assigned_committee:
                 unassigned_campers.append(camper)
             else:
-                assigned_campers[camper.assigned_committee].append(camper)
+              if camper.assigned_committee in assigned_campers: 
+	  	assigned_campers[camper.assigned_committee].append(camper)
+	      else:
+	        unassigned_campers.append(camper)
 
         template_vars = { 'conf' : conf,
                           'unassigned_campers' : unassigned_campers,
