@@ -117,8 +117,6 @@ Edit User Info
 
 <br/><input type="submit" action="/camper/edit"/ value="Save"/>
 
-  <input type="hidden" name="arrival_time" value="{{camper.arrival_time}}"/>
-  <input type="hidden" name="departure_time" value="{{camper.departure_time}}"/>
   <input type="hidden" name="transportation_means" value="{{camper.transportation_means}}"/>
   <input type="hidden" name="bringing_rv" value="{% if camper.bringing_rv %}on{% else %}off{% endif %}"/>
   <input type="hidden" name="rv_hookup" value="{% if camper.rv_hookup %}on{% else %}off{% endif %}"/>

@@ -28,6 +28,13 @@ class EarlyTeamReport(webapp.RequestHandler):
         path = os.path.join(os.path.dirname(__file__), 'templates', 'early_team_report.html')
         self.response.out.write(template.render(path, {'campers' : campers }))
 
+    def post(self):
+	camper = db.get(self.request.get('camper_key'))
+	camper.early_team_assigned = self.request.get('early_team_assigned') == 'on'
+        camper.put()
+	self.redirect('/admin/early_team')
+
+
 class MealsReport(webapp.RequestHandler):
     def get(self):
 	conf = camp.current()

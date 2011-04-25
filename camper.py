@@ -40,6 +40,7 @@ class Camper(db.Model):
     teaching_info = db.TextProperty()
     
     early_team = db.BooleanProperty()
+    early_team_assigned = db.BooleanProperty(default=False)
     strike = db.BooleanProperty()
 
     arrival_date = db.StringProperty()
