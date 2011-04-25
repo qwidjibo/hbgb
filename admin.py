@@ -18,6 +18,59 @@ class LandingPage(webapp.RequestHandler):
         path = os.path.join(os.path.dirname(__file__), 'templates', 'admin_landing.html')
         self.response.out.write(template.render(path, { }))
 
+class MealsReport(webapp.RequestHandler):
+    def get(self):
+	conf = camp.current()
+	empty_meal = { 'omnivore' : 0,
+                       'pescatarian' : 0,
+	  	       'vegetarian' : 0,
+		       'vegan' : 0,
+                       'raw' : 0,
+                       'beef' : 0,
+                       'chicken' : 0,
+                       'pork' : 0,
+                       'bacon' : 0,
+                       'fish' : 0,
+                       'tofu' : 0,
+                       'human' : 0,
+                       'total' : 0,
+		       'restrictions' : [] }
+        date_counts = { }
+	for cd in campdate.CampDate.all():
+	  date_counts[str(cd.date)] = empty_meal.copy()
+	  for c in camper.Camper.all():
+            if c.status == 'accepted' and c.arrival_date <= str(cd.date) and c.departure_date >= str(cd.date):
+	      date_counts[str(cd.date)]['total'] += 1
+              if c.food_type == 'omnivore':
+		date_counts[str(cd.date)]['omnivore'] += 1
+	      if c.food_type == 'pescatarian':
+		date_counts[str(cd.date)]['pescatarian'] += 1
+	      if c.food_type == 'vegetarian':
+		date_counts[str(cd.date)]['vegetarian'] += 1
+	      if c.food_type == 'vegan':
+		date_counts[str(cd.date)]['vegan'] += 1
+	      if c.food_type == 'raw':
+		date_counts[str(cd.date)]['raw'] += 1
+	      if c.eats_beef:
+		date_counts[str(cd.date)]['beef'] += 1
+	      if c.eats_chicken:
+		date_counts[str(cd.date)]['chicken'] += 1
+	      if c.eats_pork:
+		date_counts[str(cd.date)]['pork'] += 1
+	      if c.eats_bacon:
+		date_counts[str(cd.date)]['bacon'] += 1
+	      if c.eats_fish:
+		date_counts[str(cd.date)]['fish'] += 1
+	      if c.eats_tofu:
+		date_counts[str(cd.date)]['tofu'] += 1
+	      if c.eats_human:
+		date_counts[str(cd.date)]['human'] += 1
+	      if c.dietary_restrictions:
+		date_counts[str(cd.date)]['restrictions'].append(c.dietary_restrictions)
+        path = os.path.join(os.path.dirname(__file__), 'templates', 'meals_report.html')
+        self.response.out.write(template.render(path, { 'date_counts': date_counts }))
+
+
 class CampAdminPage(webapp.RequestHandler):
     def get(self):
         path = os.path.join(os.path.dirname(__file__), 'templates', 'admin_camp.html')
@@ -167,7 +220,8 @@ application = webapp.WSGIApplication(
         ('/admin/dates/edit', DateEditFormSubmit),
         ('/admin/dates/delete', DateDeleteFormSubmit),
         ('/admin/committee/add', CommitteeAddFormSubmit),
-        ('/admin/committee/delete', CommitteeDeleteFormSubmit)
+        ('/admin/committee/delete', CommitteeDeleteFormSubmit),
+	('/admin/meals', MealsReport)
         ],
     debug=True)
 
