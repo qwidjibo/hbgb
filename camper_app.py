@@ -19,10 +19,11 @@ class CamperEditForm(webapp.RequestHandler):
         path = os.path.join(os.path.dirname(__file__), 'templates', 'edit_camper.html')
         conf = camp.current()
 	camper = db.get(self.request.get('camper_key'))
+	dates = campdate.SortedDates()
 	healer = None
  	for h in camper.healer_set:
   	  healer = h	
-        self.response.out.write(template.render(path, {'conf' : conf, 'camper' : camper, 'healer' : healer}))
+        self.response.out.write(template.render(path, {'conf' : conf, 'camper' : camper, 'healer' : healer, 'dates' : dates}))
 
     def post(self):
 	logging.info('"'+self.request.get('camper_key')+'"')		
@@ -43,6 +44,7 @@ class CamperEditForm(webapp.RequestHandler):
 	camper.first_choice_reason = self.request.get('first_choice_reason')
 	camper.second_choice_reason = self.request.get('second_choice_reason')
 	camper.wants_to_heal = self.request.get('wants_to_heal') == 'on'
+	camper.wants_to_teach = self.request.get('wants_to_teach') == 'on'
 	camper.wants_to_lead = self.request.get('wants_to_lead') == 'on'
 	camper.teaching_info = self.request.get('teaching_info')
 	camper.early_team = self.request.get('early_team') == 'on'

@@ -40,20 +40,83 @@ Edit User Info
     Triage <input name="triage" type="checkbox" {% if healer.triage %} checked {% endif %} /> <br/>
     Tables Bringing <input name="tables_bringing" type="text" size=10 value="{{healer.tables_bringing}}" /> <br/>
     <input type="hidden" name="preferred_time_to_heal" value="{{preferred_time_to_heal}}"/>
-  
-  <input type="submit" action="/camper/edit"/ value="Save"/>
+
+
+<h2> Camp Info </h2>
 
   <input type="hidden" name="assigned_committee" value="{{camper.assigned_committee}}"/>
-  <input type="hidden" name="first_choice_committee" value="{{camper.first_choice_committee}}"/>
-  <input type="hidden" name="second_choice_committee" value="{{camper.second_choice_committee}}"/>
-  <input type="hidden" name="first_choice_reason" value="{{camper.first_choice_reason}}"/>
-  <input type="hidden" name="second_choice_reason" value="{{camper.second_choice_reason}}"/>
-  <input type="hidden" name="wants_to_lead" value="{{camper.wants_to_lead}}"/>
-  <input type="hidden" name="teaching_info" value="{{camper.teaching_info}}"/>
-  <input type="hidden" name="early_team" value="{% if camper.early_team %}on{% else %}off{% endif %}"/>
-  <input type="hidden" name="strike" value="{% if camper.strike %}on{% else %}off{% endif %}"/>
-  <input type="hidden" name="arrival_date" value="{{camper.arrival_date}}"/>
-  <input type="hidden" name="departure_date" value="{{camper.departure_date}}"/>
+  First Choice Committee: <select name="first_choice_committee">
+    <option value="{{camper.first_choice_committee}}" selected>{{camper.first_choice_committee}}</option>
+    <option>--</option>
+    {% for committee in conf.committees %}
+    <option value="{{committee}}">{{committee}}</option>
+    {% endfor %}
+  </select><br/>
+
+  Second Choice Committee: <select name="second_choice_committee">
+    <option value="{{camper.second_choice_committee}}" selected>{{camper.second_choice_committee}}</option>
+    <option>--</option> 
+    {% for committee in conf.committees %}
+    <option value="{{committee}}">{{committee}}</option>
+    {% endfor %}
+  </select>
+  <br/>
+
+  First Choice Reason <br/>
+  <textarea name="first_choice_reason" rows=5 cols=80>{{camper.first_choice_reason}}</textarea> <br/>
+
+  Second Choice Reason <br/>
+  <textarea name="second_choice_reason" rows=5 cols=80>{{camper.second_choice_reason}}</textarea> <br/>
+
+
+
+  Wants to lead: <input type="checkbox" name="wants_to_lead" {% if camper.wants_to_lead %} checked {% endif %}/> <br/>
+  Wants to teach: <input type="checkbox" name="wants_to_teach" {% if camper.wants_to_teach %} checked {% endif %}/> <br/>
+
+  Teaching info: <br/> <textarea rows=5 cols=80 name="teaching_info">{{camper.teaching_info}}</textarea>
+
+
+<h2> Schedule Info </h2>
+
+  Early Team: <input type="checkbox" name="early_team" {% if camper.early_team %} checked {% endif %}/> <br/>
+  Strike: <input type="checkbox" name="strike" {% if camper.strike %} checked {% endif %}/> <br/>
+ 
+  Arrival Date: <select name='arrival_date'> 
+    <option value="{{camper.arrival_date}}" selected>{{camper.arrival_date}}</option>
+    <option>--</option>
+    {% for d in dates %}
+    <option value="{{d.date}}">{{d.date}}</option>
+    {% endfor %}
+  </select>   
+
+  Arrival Time: <select name='arrival_time'>
+    <option value="{{camper.arrival_time}}" selected>{{camper.arrival_time}}</option>
+    <option>--</option>
+    <option value='before_breakfast'>Before Breakfast</option>
+    <option value='before_lunch'>Before Lunch</option>
+    <option value='before_dinner'>Before Dinner</option>
+    <option value='after_dinner'>After Dinner</option>
+  </select>
+
+  <br/>Departure Date: <select name='departure_date'> 
+    <option value="{{camper.departure_date}}" selected>{{camper.departure_date}}</option>
+    <option>--</option>
+    {% for d in dates %}
+    <option value="{{d.date}}">{{d.date}}</option>
+    {% endfor %}
+  </select>   
+
+  Departure Time: <select name='departure_time'>
+    <option value="{{camper.departure_time}}" selected>{{camper.departure_time}}</option>
+    <option>--</option>
+    <option value='before_breakfast'>Before Breakfast</option>
+    <option value='before_lunch'>Before Lunch</option>
+    <option value='before_dinner'>Before Dinner</option>
+    <option value='after_dinner'>After Dinner</option>
+  </select>
+
+<br/><input type="submit" action="/camper/edit"/ value="Save"/>
+
   <input type="hidden" name="arrival_time" value="{{camper.arrival_time}}"/>
   <input type="hidden" name="departure_time" value="{{camper.departure_time}}"/>
   <input type="hidden" name="transportation_means" value="{{camper.transportation_means}}"/>

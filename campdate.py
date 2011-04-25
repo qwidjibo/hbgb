@@ -7,3 +7,10 @@ class CampDate(db.Model):
     strike = db.BooleanProperty(default=False)
     desc = db.StringProperty(default="")
 
+
+def SortedDates():
+  q = db.GqlQuery('SELECT * FROM CampDate ORDER BY date ASC')
+  dates = []
+  for d in q.fetch(100):
+    dates.append(d)
+  return dates
