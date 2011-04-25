@@ -8,23 +8,23 @@
   <body>
     <p><a href="/admin">Back to the main admin page</a></p>
 
-    {% for date in date_counts.items %}
-    <h3> {{date.0}} </h3>
-    Total: {{ date.1.total}} <br/>
-    Omnivore: {{ date.1.omnivore }} <br/>
-    Pescatarian: {{ date.1.pescatarian }} <br/>
-    Vegetarian: {{ date.1.vegitarian }} <br/>
-    Vegan: {{ date.1.vegan }} <br/>
-    Raw: {{ date.1.raw }} <br/>
-    Eats Beef: {{ date.1.beef }} <br/>
-    Eats Chicken: {{ date.1.chicken }} <br/>
-    Eats Pork: {{ date.1.pork }} <br/>
-    Eats Bacon: {{ date.1.bacon }} <br/>
-    Eats Fish: {{ date.1.fish }} <br/>
-    Eats Tofu: {{ date.1.tofu }} <br/>
-    Eats Human: {{ date.1.human }} <br/>
+    {% for date in date_counts %}
+    <h3> {{date.date}} </h3>
+    Total: {{ date.total}} <br/>
+    Omnivore: {{ date.omnivore }} <br/>
+    Pescatarian: {{ date.pescatarian }} <br/>
+    Vegetarian: {{ date.vegitarian }} <br/>
+    Vegan: {{ date.vegan }} <br/>
+    Raw: {{ date.raw }} <br/>
+    Eats Beef: {{ date.beef }} <br/>
+    Eats Chicken: {{ date.chicken }} <br/>
+    Eats Pork: {{ date.pork }} <br/>
+    Eats Bacon: {{ date.bacon }} <br/>
+    Eats Fish: {{ date.fish }} <br/>
+    Eats Tofu: {{ date.tofu }} <br/>
+    Eats Human: {{ date.human }} <br/>
     Restrictions:
-      {% for r in data.1.restrictions %}
+      {% for r in data.restrictions %}
         <br/> {{ r }}
       {% endfor %}
     <p><a href="/admin">Back to the main admin page</a></p>

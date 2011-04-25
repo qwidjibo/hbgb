@@ -23,7 +23,7 @@ class MealsReport(webapp.RequestHandler):
 	conf = camp.current()
 	empty_meal = { 'omnivore' : 0,
                        'pescatarian' : 0,
-	  	       'vegetarian' : 0,
+	  	       'vegitarian' : 0,
 		       'vegan' : 0,
                        'raw' : 0,
                        'beef' : 0,
@@ -35,38 +35,41 @@ class MealsReport(webapp.RequestHandler):
                        'human' : 0,
                        'total' : 0,
 		       'restrictions' : [] }
-        date_counts = { }
-	for cd in campdate.CampDate.all():
-	  date_counts[str(cd.date)] = empty_meal.copy()
+        date_counts = []
+	q = db.GqlQuery('SELECT * FROM CampDate ORDER BY date ASC')
+	for cd in q.fetch(100):
+	  date_count = empty_meal.copy()
+	  date_count['date'] = str(cd.date)
 	  for c in camper.Camper.all():
             if c.status == 'accepted' and c.arrival_date <= str(cd.date) and c.departure_date >= str(cd.date):
-	      date_counts[str(cd.date)]['total'] += 1
+	      date_count['total'] += 1
               if c.food_type == 'omnivore':
-		date_counts[str(cd.date)]['omnivore'] += 1
+		date_count['omnivore'] += 1
 	      if c.food_type == 'pescatarian':
-		date_counts[str(cd.date)]['pescatarian'] += 1
+		date_count['pescatarian'] += 1
 	      if c.food_type == 'vegitarian':
-		date_counts[str(cd.date)]['vegitarian'] += 1
+		date_count['vegitarian'] += 1
 	      if c.food_type == 'vegan':
-		date_counts[str(cd.date)]['vegan'] += 1
+		date_count['vegan'] += 1
 	      if c.food_type == 'raw':
-		date_counts[str(cd.date)]['raw'] += 1
+		date_count['raw'] += 1
 	      if c.eats_beef:
-		date_counts[str(cd.date)]['beef'] += 1
+		date_count['beef'] += 1
 	      if c.eats_chicken:
-		date_counts[str(cd.date)]['chicken'] += 1
+		date_count['chicken'] += 1
 	      if c.eats_pork:
-		date_counts[str(cd.date)]['pork'] += 1
+		date_count['pork'] += 1
 	      if c.eats_bacon:
-		date_counts[str(cd.date)]['bacon'] += 1
+		date_count['bacon'] += 1
 	      if c.eats_fish:
-		date_counts[str(cd.date)]['fish'] += 1
+		date_count['fish'] += 1
 	      if c.eats_tofu:
-		date_counts[str(cd.date)]['tofu'] += 1
+		date_count['tofu'] += 1
 	      if c.eats_human:
-		date_counts[str(cd.date)]['human'] += 1
+		date_count['human'] += 1
 	      if c.dietary_restrictions:
-		date_counts[str(cd.date)]['restrictions'].append(c.dietary_restrictions)
+		date_count['restrictions'].append(c.dietary_restrictions)
+          date_counts.append(date_count)
         path = os.path.join(os.path.dirname(__file__), 'templates', 'meals_report.html')
         self.response.out.write(template.render(path, { 'date_counts': date_counts }))
 
