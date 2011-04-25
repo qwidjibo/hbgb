@@ -8,26 +8,79 @@
   <body>
     <p><a href="/admin">Back to the main admin page</a></p>
 
-    {% for date in date_counts %}
-    <h3> {{date.date}} </h3>
-    Total: {{ date.total}} <br/>
-    Omnivore: {{ date.omnivore }} <br/>
-    Pescatarian: {{ date.pescatarian }} <br/>
-    Vegetarian: {{ date.vegitarian }} <br/>
-    Vegan: {{ date.vegan }} <br/>
-    Raw: {{ date.raw }} <br/>
-    Eats Beef: {{ date.beef }} <br/>
-    Eats Chicken: {{ date.chicken }} <br/>
-    Eats Pork: {{ date.pork }} <br/>
-    Eats Bacon: {{ date.bacon }} <br/>
-    Eats Fish: {{ date.fish }} <br/>
-    Eats Tofu: {{ date.tofu }} <br/>
-    Eats Human: {{ date.human }} <br/>
+    <table>
+    {% for meal in meal_counts %}
+    <tr> <td> <h2> {{meal.0.date}} </h2> </td> </tr>
+    <tr>
+    <td width="300px">
+    <h3> {{meal.0.meal}} </h3>
+    Total: {{ meal.0.total}} <br/>
+    Omnivore: {{ meal.0.omnivore }} <br/>
+    Pescatarian: {{ meal.0.pescatarian }} <br/>
+    Vegetarian: {{ meal.0.vegitarian }} <br/>
+    Vegan: {{ meal.0.vegan }} <br/>
+    Raw: {{ meal.0.raw }} <br/>
+    Eats Beef: {{ meal.0.beef }} <br/>
+    Eats Chicken: {{ meal.0.chicken }} <br/>
+    Eats Pork: {{ meal.0.pork }} <br/>
+    Eats Bacon: {{ meal.0.bacon }} <br/>
+    Eats Fish: {{ meal.0.fish }} <br/>
+    Eats Tofu: {{ meal.0.tofu }} <br/>
+    Eats Human: {{ meal.0.human }} <br/>
     Restrictions:
-      {% for r in data.restrictions %}
-        <br/> {{ r }}
+      <ul>
+      {% for r in meal.0.restrictions %}
+        <li> {{ r }} </li>
       {% endfor %}
-    <p><a href="/admin">Back to the main admin page</a></p>
+      </ul>
+    </td>
+    <td width="300px">
+    <h3> {{meal.1.meal}} </h3>
+    Total: {{ meal.1.total}} <br/>
+    Omnivore: {{ meal.1.omnivore }} <br/>
+    Pescatarian: {{ meal.1.pescatarian }} <br/>
+    Vegetarian: {{ meal.1.vegitarian }} <br/>
+    Vegan: {{ meal.1.vegan }} <br/>
+    Raw: {{ meal.1.raw }} <br/>
+    Eats Beef: {{ meal.1.beef }} <br/>
+    Eats Chicken: {{ meal.1.chicken }} <br/>
+    Eats Pork: {{ meal.1.pork }} <br/>
+    Eats Bacon: {{ meal.1.bacon }} <br/>
+    Eats Fish: {{ meal.1.fish }} <br/>
+    Eats Tofu: {{ meal.1.tofu }} <br/>
+    Eats Human: {{ meal.1.human }} <br/>
+    Restrictions:
+      <ul>
+      {% for r in meal.1.restrictions %}
+        <li> {{ r }} </li>
+      {% endfor %}
+      </ul>
+    </td>
+    <td width="300px">
+    <h3> {{meal.2.meal}} </h3>
+    Total: {{ meal.2.total}} <br/>
+    Omnivore: {{ meal.2.omnivore }} <br/>
+    Pescatarian: {{ meal.2.pescatarian }} <br/>
+    Vegetarian: {{ meal.2.vegitarian }} <br/>
+    Vegan: {{ meal.2.vegan }} <br/>
+    Raw: {{ meal.2.raw }} <br/>
+    Eats Beef: {{ meal.2.beef }} <br/>
+    Eats Chicken: {{ meal.2.chicken }} <br/>
+    Eats Pork: {{ meal.2.pork }} <br/>
+    Eats Bacon: {{ meal.2.bacon }} <br/>
+    Eats Fish: {{ meal.2.fish }} <br/>
+    Eats Tofu: {{ meal.2.tofu }} <br/>
+    Eats Human: {{ meal.2.human }} <br/>
+    Restrictions:
+      <ul>
+      {% for r in meal.2.restrictions %}
+        <li> {{ r }} </li>
+      {% endfor %}
+      </ul>
+    </td>
+    </tr>
     {% endfor %}
+  </table>
+    <p><a href="/admin">Back to the main admin page</a></p>
   </body>
 </html>

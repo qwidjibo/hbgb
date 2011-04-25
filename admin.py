@@ -36,9 +36,40 @@ class EarlyTeamReport(webapp.RequestHandler):
 
 
 class MealsReport(webapp.RequestHandler):
+
+    def add_to_meal(self, meal, c):
+	meal['total'] += 1
+        if c.food_type == 'omnivore':
+ 	  meal['omnivore'] += 1
+	if c.food_type == 'pescatarian':
+	  meal['pescatarian'] += 1
+	if c.food_type == 'vegitarian':
+	  meal['vegitarian'] += 1
+	if c.food_type == 'vegan':
+	  meal['vegan'] += 1
+	if c.food_type == 'raw':
+	  meal['raw'] += 1
+	if c.eats_beef:
+	  meal['beef'] += 1
+	if c.eats_chicken:
+	  meal['chicken'] += 1
+	if c.eats_pork:
+	  meal['pork'] += 1
+	if c.eats_bacon:
+	  meal['bacon'] += 1
+	if c.eats_fish:
+	  meal['fish'] += 1
+	if c.eats_tofu:
+	  meal['tofu'] += 1
+	if c.eats_human:
+	  meal['human'] += 1
+	if c.dietary_restrictions:
+	  meal['restrictions'].append(c.dietary_restrictions)
+
     def get(self):
 	conf = camp.current()
-	empty_meal = { 'omnivore' : 0,
+	empty_meal = { 'meal' : 'who knows?',
+		       'omnivore' : 0,
                        'pescatarian' : 0,
 	  	       'vegitarian' : 0,
 		       'vegan' : 0,
@@ -50,45 +81,55 @@ class MealsReport(webapp.RequestHandler):
                        'fish' : 0,
                        'tofu' : 0,
                        'human' : 0,
-                       'total' : 0,
-		       'restrictions' : [] }
-        date_counts = []
-	q = db.GqlQuery('SELECT * FROM CampDate ORDER BY date ASC')
-	for cd in q.fetch(100):
-	  date_count = empty_meal.copy()
-	  date_count['date'] = str(cd.date)
-	  for c in camper.Camper.all():
-            if c.status == 'accepted' and c.arrival_date <= str(cd.date) and c.departure_date >= str(cd.date):
-	      date_count['total'] += 1
-              if c.food_type == 'omnivore':
-		date_count['omnivore'] += 1
-	      if c.food_type == 'pescatarian':
-		date_count['pescatarian'] += 1
-	      if c.food_type == 'vegitarian':
-		date_count['vegitarian'] += 1
-	      if c.food_type == 'vegan':
-		date_count['vegan'] += 1
-	      if c.food_type == 'raw':
-		date_count['raw'] += 1
-	      if c.eats_beef:
-		date_count['beef'] += 1
-	      if c.eats_chicken:
-		date_count['chicken'] += 1
-	      if c.eats_pork:
-		date_count['pork'] += 1
-	      if c.eats_bacon:
-		date_count['bacon'] += 1
-	      if c.eats_fish:
-		date_count['fish'] += 1
-	      if c.eats_tofu:
-		date_count['tofu'] += 1
-	      if c.eats_human:
-		date_count['human'] += 1
-	      if c.dietary_restrictions:
-		date_count['restrictions'].append(c.dietary_restrictions)
-          date_counts.append(date_count)
+                       'total' : 0 }
+        meal_counts = []
+        campers = []
+	q = db.GqlQuery('SELECT * FROM Camper WHERE status = \'accepted\'')
+        for c in q.fetch(100):
+          campers.append(c)
+	for cd in campdate.SortedDates():
+	  breakfast = empty_meal.copy()
+	  lunch = empty_meal.copy()
+	  dinner = empty_meal.copy()
+	  breakfast['restrictions'] = []
+	  lunch['restrictions'] = []
+	  dinner['restrictions'] = []
+	  breakfast['date'] = str(cd.date)
+	  lunch['date'] = str(cd.date)
+	  dinner['date'] = str(cd.date)
+	  breakfast['meal'] = 'breakfast'
+	  lunch['meal'] = 'lunch'
+	  dinner['meal'] = 'dinner'
+	  for c in campers:
+            if c.arrival_date < str(cd.date) and c.departure_date > str(cd.date):
+              self.add_to_meal(breakfast, c)
+              self.add_to_meal(lunch, c)
+              self.add_to_meal(dinner, c)
+	      logging.info(str(breakfast))
+            if c.arrival_date == str(cd.date):
+              if c.arrival_time == 'before_breakfast':
+	        self.add_to_meal(breakfast, c)
+   		self.add_to_meal(lunch, c)
+	 	self.add_to_meal(dinner, c)
+	      if c.arrival_time == 'before_lunch':
+	        self.add_to_meal(lunch, c)
+	        self.add_to_meal(dinner, c)
+	      if c.arrival_time == 'before_dinner':
+	        self.add_to_meal(dinner, c)
+            if c.departure_date == str(cd.date):
+	      if c.departure_time == 'after_dinner':
+	        self.add_to_meal(breakfast, c)
+	        self.add_to_meal(lunch, c)
+	        self.add_to_meal(dinner, c)
+              if c.departure_time == 'before_dinner':
+                self.add_to_meal(breakfast, c)
+                self.add_to_meal(lunch, c)
+              if c.departure_time == 'before_lunch':
+                self.add_to_meal(breakfast, c)
+          meal_counts.append([breakfast, lunch, dinner])
+
         path = os.path.join(os.path.dirname(__file__), 'templates', 'meals_report.html')
-        self.response.out.write(template.render(path, { 'date_counts': date_counts }))
+        self.response.out.write(template.render(path, { 'meal_counts': meal_counts }))
 
 
 class CampAdminPage(webapp.RequestHandler):
