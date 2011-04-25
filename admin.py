@@ -45,8 +45,8 @@ class MealsReport(webapp.RequestHandler):
 		date_counts[str(cd.date)]['omnivore'] += 1
 	      if c.food_type == 'pescatarian':
 		date_counts[str(cd.date)]['pescatarian'] += 1
-	      if c.food_type == 'vegetarian':
-		date_counts[str(cd.date)]['vegetarian'] += 1
+	      if c.food_type == 'vegitarian':
+		date_counts[str(cd.date)]['vegitarian'] += 1
 	      if c.food_type == 'vegan':
 		date_counts[str(cd.date)]['vegan'] += 1
 	      if c.food_type == 'raw':
