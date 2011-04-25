@@ -18,6 +18,16 @@ class LandingPage(webapp.RequestHandler):
         path = os.path.join(os.path.dirname(__file__), 'templates', 'admin_landing.html')
         self.response.out.write(template.render(path, { }))
 
+
+class EarlyTeamReport(webapp.RequestHandler):
+    def get(self):
+	q = db.GqlQuery('SELECT * FROM Camper WHERE status=\'accepted\' AND early_team=True')
+        campers = []
+        for c in q.fetch(100):
+	  campers.append(c)
+        path = os.path.join(os.path.dirname(__file__), 'templates', 'early_team_report.html')
+        self.response.out.write(template.render(path, {'campers' : campers }))
+
 class MealsReport(webapp.RequestHandler):
     def get(self):
 	conf = camp.current()
@@ -224,7 +234,8 @@ application = webapp.WSGIApplication(
         ('/admin/dates/delete', DateDeleteFormSubmit),
         ('/admin/committee/add', CommitteeAddFormSubmit),
         ('/admin/committee/delete', CommitteeDeleteFormSubmit),
-	('/admin/meals', MealsReport)
+	('/admin/meals', MealsReport),
+	('/admin/early_team', EarlyTeamReport)
         ],
     debug=True)
 

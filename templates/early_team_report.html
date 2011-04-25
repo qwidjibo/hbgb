@@ -1,0 +1,15 @@
+<html>
+  <head>
+    <title>Early Team Report</title>
+    <link rel="stylesheet" type="text/css" href="/css/base.css"/>
+  </head>
+
+  <body>
+    <p><a href="/admin">Back to the main admin page</a></p>
+
+    {% for camper in campers %}
+    <a href="/camper/edit?camper_key={{ camper.key }}">{{ camper.realname }} - {{ camper.email }}</a> <br/>
+    {% endfor %}
+    <p><a href="/admin">Back to the main admin page</a></p>
+  </body>
+</html>
