@@ -22,11 +22,15 @@ class LandingPage(webapp.RequestHandler):
 class EarlyTeamReport(webapp.RequestHandler):
     def get(self):
 	q = db.GqlQuery('SELECT * FROM Camper WHERE status=\'accepted\' AND early_team=True')
-        campers = []
+        assigned_early = []
+        requested_early = []
         for c in q.fetch(100):
-	  campers.append(c)
+	  if c.early_team_assigned:
+	    assigned_early.append(c)
+          else:
+            requested_early.append(c)
         path = os.path.join(os.path.dirname(__file__), 'templates', 'early_team_report.html')
-        self.response.out.write(template.render(path, {'campers' : campers }))
+        self.response.out.write(template.render(path, {'assigned' : assigned_early, 'requested' : requested_early  }))
 
     def post(self):
 	camper = db.get(self.request.get('camper_key'))

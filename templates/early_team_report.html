@@ -7,28 +7,24 @@
   <body>
     <p><a href="/admin">Back to the main admin page</a></p>
 
-    <h2> Assigned to Early Team </h2>
-    {% for camper in campers %}
-    {% if camper.early_team_assigned %}
+    <h2> Assigned to Early Team - {{ assigned|length }} Campers</h2>
+    {% for camper in assigned %}
     <form action="/admin/early_team" method="post">
       <input type="hidden" name="camper_key" value="{{ camper.key }}"/>
       <input type="hidden" name="early_team_assigned" value="off"/>
       <a href="/camper/edit?camper_key={{ camper.key }}">{{ camper.realname }} - {{ camper.email }}</a> 
       <input type="submit" action="/admin/early_team" value="Remove from ET"> <br/>
     </form>
-    {% endif %}
     {% endfor %}
     <p><a href="/admin">Back to the main admin page</a></p>
-    <h2> Not assigned to Early Team </h2>
-    {% for camper in campers %}
-    {% if not camper.early_team_assigned %}
+    <h2> Not assigned to Early Team - {{ requested|length }} </h2>
+    {% for camper in requested %}
     <form action="/admin/early_team" method="post">
       <input type="hidden" name="camper_key" value="{{ camper.key }}"/>
       <input type="hidden" name="early_team_assigned" value="on"/>
       <a href="/camper/edit?camper_key={{ camper.key }}">{{ camper.realname }} - {{ camper.email }}</a>
       <input type="submit" action="/admin/early_team" value="Add to ET"> <br/>
     </form>
-    {% endif %}
     {% endfor %}
     <p><a href="/admin">Back to the main admin page</a></p>
   </body>
