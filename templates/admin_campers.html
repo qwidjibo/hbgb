@@ -41,7 +41,7 @@
 
 
     <p><a href="/admin">Back to the main admin page</a></p>    
-    <h2> Waitlisted Campers - {{ waitlisted_camers|length }} Campers</h2>
+    <h2> Waitlisted Campers - {{ waitlisted_campers|length }} Campers</h2>
     {% for camper in waitlisted_campers %}
     <form action="/admin/camper/editstatus" method="post">
       <input type="hidden" name="key" value="{{ camper.key }}"/>
