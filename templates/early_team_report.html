@@ -17,7 +17,7 @@
     </form>
     {% endfor %}
     <p><a href="/admin">Back to the main admin page</a></p>
-    <h2> Not assigned to Early Team - {{ requested|length }} </h2>
+    <h2> Not assigned to Early Team - {{ requested|length }} Campers</h2>
     {% for camper in requested %}
     <form action="/admin/early_team" method="post">
       <input type="hidden" name="camper_key" value="{{ camper.key }}"/>
