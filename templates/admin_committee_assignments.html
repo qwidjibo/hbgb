@@ -7,7 +7,7 @@
   <body>
     <p><a href="/admin">Back to the main admin page</a></p>
 
-    <h3>Unassigned Campers</h3>
+    <h3>Unassigned Campers - {{unassigned_campers|length}} Campers</h3>
 
     {% for camper in unassigned_campers %}
     <form action="/admin/committeeassigner" method="post">
@@ -28,7 +28,7 @@
     {% endfor %}
 
     {% for committee in assigned_campers.items %}
-    <h3>{{committee.0}}</h3>
+    <h3>{{committee.0}} - {{committee.1|length}} Campers</h3>
     {% for camper in committee.1 %}
     <form action="/admin/committeeassigner" method="post">
       <input type="hidden" name="key" value="{{ camper.key }}"/>
