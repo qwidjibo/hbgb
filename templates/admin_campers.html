@@ -7,7 +7,7 @@
   <body>
     <p><a href="/admin">Back to the main admin page</a></p>
 
-    <h2> Registered Campers </h2>
+    <h2> Registered Campers -- {{ registered_campers|length }} Campers</h2>
 
     {% for camper in registered_campers %}
     <form action="/admin/camper/editstatus" method="post">
@@ -24,7 +24,7 @@
     {% endfor %}
 
     <p><a href="/admin">Back to the main admin page</a></p>    
-    <h2> Accepted Campers </h2>
+    <h2> Accepted Campers - {{ accepted_campers|length}} Campers</h2>
     {% for camper in accepted_campers %}
     <form action="/admin/camper/editstatus" method="post">
       <input type="hidden" name="key" value="{{ camper.key }}"/>
@@ -41,7 +41,7 @@
 
 
     <p><a href="/admin">Back to the main admin page</a></p>    
-    <h2> Waitlisted Campers </h2>
+    <h2> Waitlisted Campers - {{ waitlisted_camers|length }} Campers</h2>
     {% for camper in waitlisted_campers %}
     <form action="/admin/camper/editstatus" method="post">
       <input type="hidden" name="key" value="{{ camper.key }}"/>
@@ -58,7 +58,7 @@
 
 
     <p><a href="/admin">Back to the main admin page</a></p>    
-    <h2> Rejected Campers </h2>
+    <h2> Rejected Campers - {{ rejected_campers|length }} Campers</h2>
     {% for camper in rejected_campers %}
     <form action="/admin/camper/editstatus" method="post">
       <input type="hidden" name="key" value="{{ camper.key }}"/>
