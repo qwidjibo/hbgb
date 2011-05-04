@@ -1,0 +1,2 @@
+date,meal,total,omni,pesc,vegi,vegan,raw,beef,chicken,pork,bacon,fish,tofu,restrictions{% for meal in meal_counts %}
+{{meal.date}},{{meal.meal}},{{meal.total}},{{meal.omnivore}},{{meal.pescatarian}},{{meal.vegitarian}},{{meal.vegan}},{{meal.raw}},{{meal.beef}},{{meal.chicken}},{{meal.pork}},{{meal.bacon}},{{meal.fish}},{{meal.tofu}},{% for r in meal.restrictions %}{{r}}--{% endfor %}{% endfor %}
