@@ -14,6 +14,29 @@ import campdate
 import camper
 import healer
 
+class CamperMissingDataForm(webapp.RequestHandler):
+    def get(self):
+        path = os.path.join(os.path.dirname(__file__), 'templates', 'update_missing_data.html')
+        camper = db.get(self.request.get('camper_key'))
+        self.response.out.write(template.render(path, {'camper' : camper}))
+
+    def post(self):
+        camper = db.get(self.request.get('camper_key'))
+        camper.transportation_means = self.request.get('transportation_means')
+        camper.bringing_rv = self.request.get('bringing_rv') == 'on'
+        camper.rv_info = self.request.get('rv_info')
+        camper.rv_hookup = self.request.get('rv_hookup') == 'on'
+        camper.structure_info = self.request.get('structure_info')
+        camper.food_type = self.request.get('food_type')
+        camper.eats_beef = self.request.get('eats_beef') == 'on'
+        camper.eats_chicken = self.request.get('eats_chicken') == 'on'
+        camper.eats_pork = self.request.get('eats_pork') == 'on'
+        camper.eats_bacon = self.request.get('eats_bacon') == 'on'
+        camper.eats_fish = self.request.get('eats_fish') == 'on'
+        camper.eats_tofu = self.request.get('eats_tofu') == 'on'
+	camper.put()
+	self.response.out.write('Thanks!')
+
 class CamperEditForm(webapp.RequestHandler):
     def get(self):
         path = os.path.join(os.path.dirname(__file__), 'templates', 'edit_camper.html')
@@ -86,7 +109,8 @@ class CamperEditForm(webapp.RequestHandler):
 
 application = webapp.WSGIApplication(
     [
-        ('/camper/edit', CamperEditForm)
+        ('/camper/edit', CamperEditForm),
+        ('/camper/update_missing_data', CamperMissingDataForm)
         ],
     debug=True)
 
