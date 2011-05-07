@@ -19,24 +19,28 @@ class LandingPage(webapp.RequestHandler):
         self.response.out.write(template.render(path, { }))
 
 
-class EarlyTeamReport(webapp.RequestHandler):
+class EarlyTeamStrikeTeamReport(webapp.RequestHandler):
     def get(self):
 	q = db.GqlQuery('SELECT * FROM Camper WHERE status=\'accepted\' AND early_team=True')
         assigned_early = []
         requested_early = []
-        for c in q.fetch(100):
+        strike = []
+        for c in q.fetch(1000):
 	  if c.early_team_assigned:
 	    assigned_early.append(c)
           else:
             requested_early.append(c)
+	q = db.GqlQuery('SELECT * FROM Camper WHERE status=\'accepted\' AND strike=True')
+        for c in q.fetch(1000):
+          strike.append(c)	  
         path = os.path.join(os.path.dirname(__file__), 'templates', 'early_team_report.html')
-        self.response.out.write(template.render(path, {'assigned' : assigned_early, 'requested' : requested_early  }))
+        self.response.out.write(template.render(path, {'assigned' : assigned_early, 'requested' : requested_early, 'strike' : strike  }))
 
     def post(self):
 	camper = db.get(self.request.get('camper_key'))
 	camper.early_team_assigned = self.request.get('early_team_assigned') == 'on'
         camper.put()
-	self.redirect('/admin/early_team')
+	self.redirect('/admin/early_team_strike_team')
 
 
 class MealsReport(webapp.RequestHandler):
@@ -287,7 +291,7 @@ application = webapp.WSGIApplication(
         ('/admin/committee/add', CommitteeAddFormSubmit),
         ('/admin/committee/delete', CommitteeDeleteFormSubmit),
 	('/admin/meals', MealsReport),
-	('/admin/early_team', EarlyTeamReport)
+	('/admin/early_team_strike_team', EarlyTeamStrikeTeamReport)
         ],
     debug=True)
 
