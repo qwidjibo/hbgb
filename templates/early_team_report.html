@@ -27,7 +27,7 @@
     </form>
     {% endfor %}
     <p><a href="/admin">Back to the main admin page</a></p>
-    <h2> Strike Team -- {{ early|length }} Campers /h2>
+    <h2> Strike Team -- {{ strike|length }} Campers </h2>
     {% for camper in strike %}
       <a href="/camper/edit?camper_key={{ camper.key }}">{{ camper.realname }} - {{ camper.email }}</a> </br/>
     {% endfor %}

@@ -1,0 +1,46 @@
+<html>
+  <head>
+    <title>Early Team Report</title>
+    <link rel="stylesheet" type="text/css" href="/css/base.css"/>
+  </head>
+
+  <body>
+    <p><a href="/admin">Back to the main admin page</a></p>
+
+    <h2> Campers in RVs -- {{ rv_campers|length }} Campers </h2>
+    {% for camper in rv_campers %}
+      <a href="/camper/edit?camper_key={{ camper.key }}">{{ camper.realname }} - {{ camper.email }}</a> --
+      {% if camper.rv_hookup %} 
+        Needs Hookup
+      {% else %}
+        Does not need hookup
+      {% endif %}
+      <br/>
+      <div class="quote">{{camper.rv_info}}</div>
+    {% endfor %}
+
+    <p><a href="/admin">Back to the main admin page</a></p>
+
+    <h2> Campers with Structures -- {{ campers_with_structures|length }} </h2>
+    {% for camper in campers_with_structures %}
+      <a href="/camper/edit?camper_key={{ camper.key }}">{{ camper.realname }} - {{ camper.email }}</a><br/>
+      <div class="quote">{{camper.structure_info}}</div>
+    {% endfor %}
+    
+    <h2> Suspicious Camper -- {{ suspicious_campers|length }} </h2>
+    Campers who either didn't list a structure/rv/dorm camp option OR who listed more than one.<br/>
+
+    {% for camper in suspicious_campers %}
+      <a href="/camper/edit?camper_key={{ camper.key }}">{{ camper.realname }} - {{ camper.email }}</a><br/>
+    {% endfor %}
+
+    <p><a href="/admin">Back to the main admin page</a></p>
+    
+    <h2> Dorm Tents -- {{ dorm_campers|length }} Campers </h2>
+    {% for camper in dorm_campers %}
+      <a href="/camper/edit?camper_key={{ camper.key }}">{{ camper.realname }} - {{ camper.email }}</a></br>
+    {% endfor %}
+
+    <p><a href="/admin">Back to the main admin page</a></p>
+  </body>
+</html>

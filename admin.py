@@ -43,6 +43,34 @@ class EarlyTeamStrikeTeamReport(webapp.RequestHandler):
 	self.redirect('/admin/early_team_strike_team')
 
 
+class StructureReport(webapp.RequestHandler):
+    def get(self):
+        path = os.path.join(os.path.dirname(__file__), 'templates', 'structures_report.html')
+        rv_campers = []
+        campers_with_structures = []
+        dorm_campers = []
+	suspicious_campers = []
+        q = db.GqlQuery('SELECT * from Camper WHERE status =\'accepted\'')
+	for c in q.fetch(1000):
+          match_count = 0
+	  if c.dorm_tent:
+ 	    match_count += 1
+	    dorm_campers.append(c)
+          if c.bringing_rv:
+	    match_count += 1
+            rv_campers.append(c)
+          if c.structure_info:
+            match_count += 1
+            campers_with_structures.append(c)
+	  if match_count != 1:
+	    suspicious_campers.append(c)          
+
+	self.response.out.write(template.render(path, 
+		{'rv_campers' : rv_campers,
+		 'campers_with_structures' : campers_with_structures,
+		 'dorm_campers' : dorm_campers,
+		 'suspicious_campers' : suspicious_campers}))
+
 class MealsReport(webapp.RequestHandler):
 
     def add_to_meal(self, meal, c):
@@ -291,6 +319,7 @@ application = webapp.WSGIApplication(
         ('/admin/committee/add', CommitteeAddFormSubmit),
         ('/admin/committee/delete', CommitteeDeleteFormSubmit),
 	('/admin/meals', MealsReport),
+	('/admin/structures', StructureReport),
 	('/admin/early_team_strike_team', EarlyTeamStrikeTeamReport)
         ],
     debug=True)
