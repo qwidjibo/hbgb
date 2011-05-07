@@ -115,23 +115,54 @@ Edit User Info
     <option value='after_dinner'>After Dinner</option>
   </select>
 
+<h2> Logistical Info </h2>
+
+Transportation Means
+<select name='transportation_means'>
+  <option value="{{camper.transportation_means}}">{{camper.transportation_means}}</option>
+  <option>--</option>
+  <option value="fly">Fly</option>
+  <option value="drive">Drive</option>
+  <option value="unsure">Not Sure</option>
+  <option value="want_to_carpool">Want to Carpool</option>
+  <option value="ride_to_offer">Can offer a ride</option>
+</select><br/>
+
+Bringing RV <input type="checkbox" name="bringing_rv" {% if camper.bringing_rv%} checked {% endif %}/><br/>
+RV Size Info: <br/> <textarea rows=5 cols=80 name="rv_info">{{camper.rv_info}}</textarea> <br/>
+Need RV Hookup: <input type="checkbox" name="rv_hookup" {% if camper.rv_hookup %} checked {% endif %}/><br/>
+
+Camping in dorm tent: <input type="checkbox" name="dorm_tent" {% if camper.dorm_tent %} checked {% endif %} /> <br/>
+
+Structures bringing:<br/> 
+<textarea name="structure_info" rows=5 cols=80>{{camper.structure_info}}</textarea>
+
+<h2> Food Info </h2>
+
+Dietary Type:
+<select name="food_type">
+  <option value="{{camper.food_type}}">{{camper.food_type}}</option>
+  <option value="omnivore">Omnivore/Carnivore</option>
+  <option value="pescatarian">Pescatarian</option>
+  <option value="vegitarian">Vegitarian</option>
+  <option value="vegan">Vegan</option>
+  <option value="raw">Raw Vegan</option>
+</select>
+<br/>
+Eats Beef<input type="checkbox" name="eats_beef" {% if camper.eats_beef %} checked {% endif%}/><br/>
+Eats Chicken<input type="checkbox" name="eats_chicken" {% if camper.eats_chicken %} checked {% endif%}/><br/>
+Eats Pork<input type="checkbox" name="eats_pork" {% if camper.eats_pork %} checked {% endif%}/><br/>
+Eats Bacon<input type="checkbox" name="eats_bacon" {% if camper.eats_bacon %} checked {% endif%}/><br/>
+Eats Tofu<input type="checkbox" name="eats_tofu" {% if camper.eats_tofu %} checked {% endif%}/><br/>
+Eats Fish<input type="checkbox" name="eats_fish" {% if camper.eats_fish %} checked {% endif%}/><br/>
+
+Dietary Restrictions:<br/>
+<textarea name="dietary_restriction" rows=5 cols=80>{{camper.dietary_restriction}}</textarea>
+
+
 <br/><input type="submit" action="/camper/edit"/ value="Save"/>
 
-  <input type="hidden" name="transportation_means" value="{{camper.transportation_means}}"/>
-  <input type="hidden" name="bringing_rv" value="{% if camper.bringing_rv %}on{% else %}off{% endif %}"/>
-  <input type="hidden" name="rv_hookup" value="{% if camper.rv_hookup %}on{% else %}off{% endif %}"/>
-  <input type="hidden" name="rv_info" value="{{camper.rv_info}}"/>
-  <input type="hidden" name="dorm_tent" value="{% if camper.dorm_tent %}on{% else %}off{% endif %}"/>
-  <input type="hidden" name="structure_info" value="{{camper.structure_info}}"/>
-  <input type="hidden" name="food_type" value="{{camper.food_type}}"/>
-  <input type="hidden" name="eats_beef" value="{% if camper.eats_beef %}on{% else %}off{% endif %}"/>
-  <input type="hidden" name="eats_chicken" value="{% if camper.eats_chicken %}on{% else %}off{% endif %}"/>
-  <input type="hidden" name="eats_pork" value="{% if camper.eats_pork %}on{% else %}off{% endif %}"/>
-  <input type="hidden" name="eats_bacon" value="{% if camper.eats_bacon %}on{% else %}off{% endif %}"/>
-  <input type="hidden" name="eats_fish" value="{% if camper.eats_fish %}on{% else %}off{% endif %}"/>
-  <input type="hidden" name="eats_tofu" value="{% if camper.eats_tofu %}on{% else %}off{% endif %}"/>
   <input type="hidden" name="eats_human" value="{% if camper.eats_human %}on{% else %}off{% endif %}"/>
-  <input type="hidden" name="dietary_restriction" value="{{camper.dietary_restriction}}"/>
   <input type="hidden" name="photo" value="{{camper.photo}}"/>
 </form>
 
