@@ -13,6 +13,7 @@ Edit User Info
    <input type="submit" value="Upload new photo"/>
    <input type="hidden" name="redirect" value="/camper/edit?camper_key={{camper.key}}"/>
    <input type="hidden" name="camper_key" value="{{camper.key}}"/>
+   <input name="allow_public_photo" type="hidden" value="{% if camper.allow_public_photo %}on{% endif %}"/> <br/>
 </form>
 
 <form action="/camper/edit" method="post">
