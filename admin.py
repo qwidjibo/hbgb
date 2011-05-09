@@ -2,6 +2,10 @@ import cgi
 import datetime
 import logging
 import os
+os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
+
+from google.appengine.dist import use_library
+use_library('django', '0.96')
 
 from google.appengine.api import users
 from google.appengine.ext import db
@@ -323,13 +327,9 @@ application = webapp.WSGIApplication(
         ('/admin/dates/delete', DateDeleteFormSubmit),
         ('/admin/committee/add', CommitteeAddFormSubmit),
         ('/admin/committee/delete', CommitteeDeleteFormSubmit),
-<<<<<<< HEAD
-	('/admin/meals', MealsReport),
 	('/admin/structures', StructureReport),
-=======
 	('/admin/meals_data.csv', MealsData),
         ('/admin/meals', MealsSpreadsheet),
->>>>>>> 418164ebae41d5f643b99a6ce162c2a88fdc42c9
 	('/admin/early_team_strike_team', EarlyTeamStrikeTeamReport)
         ],
     debug=True)
