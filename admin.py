@@ -38,9 +38,12 @@ class EarlyTeamReport(webapp.RequestHandler):
         camper.put()
 	self.redirect('/admin/early_team')
 
+class MealsSpreadsheet(webapp.RequestHandler):
+    def get(self):
+        path = os.path.join(os.path.dirname(__file__), 'templates', 'meals_spreadsheet.html')
+        self.response.out.write(template.render(path, {}))
 
-class MealsReport(webapp.RequestHandler):
-
+class MealsData(webapp.RequestHandler):
     def add_to_meal(self, meal, c):
 	meal['total'] += 1
         if c.food_type == 'omnivore':
@@ -130,9 +133,11 @@ class MealsReport(webapp.RequestHandler):
                 self.add_to_meal(lunch, c)
               if c.departure_time == 'before_lunch':
                 self.add_to_meal(breakfast, c)
-          meal_counts.append([breakfast, lunch, dinner])
+          meal_counts.append(breakfast)
+	  meal_counts.append(lunch)
+          meal_counts.append(dinner)
 
-        path = os.path.join(os.path.dirname(__file__), 'templates', 'meals_report.html')
+        path = os.path.join(os.path.dirname(__file__), 'templates', 'meals_data.csv')
         self.response.out.write(template.render(path, { 'meal_counts': meal_counts }))
 
 
@@ -286,7 +291,8 @@ application = webapp.WSGIApplication(
         ('/admin/dates/delete', DateDeleteFormSubmit),
         ('/admin/committee/add', CommitteeAddFormSubmit),
         ('/admin/committee/delete', CommitteeDeleteFormSubmit),
-	('/admin/meals', MealsReport),
+	('/admin/meals_data.csv', MealsData),
+        ('/admin/meals', MealsSpreadsheet),
 	('/admin/early_team', EarlyTeamReport)
         ],
     debug=True)
