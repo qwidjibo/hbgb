@@ -24,6 +24,7 @@ class UpdatePhoto(webapp.RequestHandler):
     def post(self):
 	camper = db.get(self.request.get('camper_key'))
 	camper.photo = images.resize(self.request.get('photo'), 256, 256)
+	camper.allow_public_photo = self.request.get('allow_public_photo') == 'on'
         camper.put() 
         if self.request.get('redirect'):
           self.redirect(self.request.get('redirect'))
@@ -66,6 +67,7 @@ class CamperEditForm(webapp.RequestHandler):
 	logging.info('"'+self.request.get('camper_key')+'"')		
 	camper = db.get(self.request.get('camper_key'))    
 	camper.realname = self.request.get('realname')
+	camper.allow_public_photo = self.request.get('allow_public_photo') == 'on'
 	camper.playaname = self.request.get('playaname')
 	camper.email = self.request.get('email')
 	camper.address = self.request.get('address')

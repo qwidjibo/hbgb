@@ -17,6 +17,7 @@ Edit User Info
 
 <form action="/camper/edit" method="post">
 
+  Allow Public Photo <input name="allow_public_photo" type="checkbox" {% if camper.allow_public_photo %} checked {% endif %}/> <br/>
   <input type="hidden" name="camper_key" value="{{camper.key}}"/>
 
   <h2> Personal Info </h2>
