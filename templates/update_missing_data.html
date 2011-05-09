@@ -1,0 +1,66 @@
+
+{% extends "reg_template.html" %}
+
+{% block subtitle %}
+Update Missing Data
+{% endblock %}
+
+{% block content %}
+<form action="/camper/update_missing_data" method="post">
+
+  <input type="hidden" name="camper_key" value="{{camper.key}}"/>
+
+<h1> Important!! </h1>
+
+If you aren't {{ camper.realname }} / {{ camper.email }}, please email q@heebeegeebeehealers.org and ask for a new link.
+
+
+<h2> Logistical Info </h2>
+
+How do you plan to get to the burn?
+<select name='transportation_means'>
+  <option value="fly">Fly</option>
+  <option value="drive">Drive</option>
+  <option value="unsure">Not Sure</option>
+  <option value="want_to_carpool">Want to Carpool</option>
+  <option value="ride_to_offer">Can offer a ride</option>
+</select><br/>
+
+Are you bringing an RV <input type="checkbox" name="bringing_rv" /><br/>
+Please give the dimensions of your RV: <br/> <textarea rows=5 cols=80 name="rv_info"></textarea> <br/>
+Do you need an RV hookup? ($75 charge): <input type="checkbox" name="rv_hookup" /><br/>
+
+Are you camping in the dorm tents? (Crowded and cramped, limit 3-person-size tent) <input type="checkbox" name="dorm_tent" /> <br/>
+
+Please describe any structures you would like to bring/camp in:<br/> 
+<textarea name="structure_info" rows=5 cols=80></textarea>
+
+<h2> Food Info </h2>
+
+Dietary Type:
+<select name="food_type">
+  <option value="omnivore">Omnivore/Carnivore</option>
+  <option value="pescatarian">Pescatarian</option>
+  <option value="vegitarian">Vegitarian</option>
+  <option value="vegan">Vegan</option>
+  <option value="raw">Raw Vegan</option>
+</select>
+<br/>
+Which of the following items do you eat?<br/>
+Beef<input type="checkbox" name="eats_beef" /><br/>
+Chicken<input type="checkbox" name="eats_chicken" /><br/>
+Pork<input type="checkbox" name="eats_pork" /><br/>
+Bacon<input type="checkbox" name="eats_bacon" /><br/>
+Tofu<input type="checkbox" name="eats_tofu" /><br/>
+Fish<input type="checkbox" name="eats_fish" /><br/>
+
+Do you have any additional dietary restrictions?<br/>
+<textarea name="dietary_restriction" rows=5 cols=80></textarea>
+
+
+<br/><input type="submit" action="/camper/edit"/ value="Save"/>
+
+</form>
+
+
+{% endblock %}
