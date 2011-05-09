@@ -107,10 +107,20 @@ class CamperEditForm(webapp.RequestHandler):
 	
 	self.redirect('/camper/edit?camper_key=' + self.request.get('camper_key'))
 
+class GetPicture(webapp.RequestHandler):
+  def get(self):
+    camper = db.get(self.request.get('camper_key'))
+    if (camper and camper.photo):
+      self.response.headers['Content-Type'] = 'image/jpeg'
+      self.response.out.write(camper.photo)
+    else:
+      self.redirect('http://2.bp.blogspot.com/-RpGM-i4MuiE/TTUGY2E3_xI/AAAAAAAABKM/_LscQyNcqOI/s1600/MissPiggyIYN.jpg')
+
 application = webapp.WSGIApplication(
     [
         ('/camper/edit', CamperEditForm),
-        ('/camper/update_missing_data', CamperMissingDataForm)
+        ('/camper/update_missing_data', CamperMissingDataForm),
+	('/camper/photo', GetPicture)
         ],
     debug=True)
 

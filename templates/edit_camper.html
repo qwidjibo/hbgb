@@ -6,6 +6,8 @@ Edit User Info
 {% endblock %}
 
 {% block content %}
+<img src="/camper/photo?camper_key={{camper.key}}"/>
+
 <form action="/camper/edit" method="post">
 
   <input type="hidden" name="camper_key" value="{{camper.key}}"/>
