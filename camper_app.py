@@ -2,11 +2,12 @@ import cgi
 import datetime
 import logging
 import os
-os.engiron['DJANGO_SETTINGS_MODULE'] = 'settings'
+os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
 
 from google.appengine.dist import use_library
 use_library('django', '0.96')
 
+from django.utils import simplejson
 from google.appengine.api import users
 from google.appengine.ext import db
 from google.appengine.ext import webapp
@@ -17,6 +18,14 @@ import camp
 import campdate
 import camper
 import healer
+
+class UpdatePhoto(webapp.RequestHandler):
+    def post(self):
+	camper = db.get(self.request.get('camper_key'))
+	camper.photo = db.Blob(self.request.get('photo'))
+        camper.put() 
+        if self.request.get('redirect'):
+          self.redirect(self.request.get('redirect'))
 
 class CamperMissingDataForm(webapp.RequestHandler):
     def get(self):
@@ -124,7 +133,8 @@ application = webapp.WSGIApplication(
     [
         ('/camper/edit', CamperEditForm),
         ('/camper/update_missing_data', CamperMissingDataForm),
-	('/camper/photo', GetPicture)
+	('/camper/photo', GetPicture),
+	('/camper/update_photo', UpdatePhoto)
         ],
     debug=True)
 

@@ -8,6 +8,13 @@ Edit User Info
 {% block content %}
 <img src="/camper/photo?camper_key={{camper.key}}"/>
 
+<form id="update_photo" action="/camper/update_photo" method="post" enctype="multipart/form-data">
+   <input type="file" name="photo"/>
+   <input type="submit" value="Upload new photo"/>
+   <input type="hidden" name="redirect" value="/camper/edit?camper_key={{camper.key}}"/>
+   <input type="hidden" name="camper_key" value="{{camper.key}}"/>
+</form>
+
 <form action="/camper/edit" method="post">
 
   <input type="hidden" name="camper_key" value="{{camper.key}}"/>
