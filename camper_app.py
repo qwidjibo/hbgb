@@ -21,10 +21,17 @@ import camper
 import healer
 
 class UpdatePhoto(webapp.RequestHandler):
+    def get(self):
+	camper = db.get(self.request.get('camper_key'))
+        path = os.path.join(os.path.dirname(__file__), 'templates', 'update_photo.html')
+        self.response.out.write(template.render(path, {'camper' : camper}))
+
     def post(self):
 	camper = db.get(self.request.get('camper_key'))
 	camper.photo = images.resize(self.request.get('photo'), 256, 256)
 	camper.allow_public_photo = self.request.get('allow_public_photo') == 'on'
+	if self.request.get('playaname'):
+	  camper.playaname = self.request.get('playaname')
         camper.put() 
         if self.request.get('redirect'):
           self.redirect(self.request.get('redirect'))

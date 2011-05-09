@@ -21,6 +21,7 @@ Edit User Info
   Allow Public Photo <input name="allow_public_photo" type="checkbox" {% if camper.allow_public_photo %} checked {% endif %}/> <br/>
   <input type="hidden" name="camper_key" value="{{camper.key}}"/>
 
+<input type="submit" action="/camper/edit"/ value="Save"/>
   <h2> Personal Info </h2>
 
   Real Name <input name="realname" type="text" size="30" value="{{camper.realname}}"/> <br/>
@@ -37,6 +38,7 @@ Edit User Info
   Why Heebees <br/> <textarea name="why_heebees" rows=4 cols=80>{{camper.why_heebees}}</textarea> <br/>
   Story <br/> <textarea name="story" rows=4 cols=80>{{camper.story}}</textarea></br>
 
+<input type="submit" action="/camper/edit"/ value="Save"/>
 <h2> Healer Info </h2>
 
   Wants to Heal <input name="wants_to_heal" type="checkbox" {% if camper.wants_to_heal %} checked {% endif %}/> <br/>
@@ -53,6 +55,7 @@ Edit User Info
     <input type="hidden" name="preferred_time_to_heal" value="{{preferred_time_to_heal}}"/>
 
 
+<input type="submit" action="/camper/edit"/ value="Save"/>
 <h2> Camp Info </h2>
 
   <input type="hidden" name="assigned_committee" value="{{camper.assigned_committee}}"/>
@@ -87,6 +90,7 @@ Edit User Info
   Teaching info: <br/> <textarea rows=5 cols=80 name="teaching_info">{{camper.teaching_info}}</textarea>
 
 
+<input type="submit" action="/camper/edit"/ value="Save"/>
 <h2> Schedule Info </h2>
 
   Early Team: <input type="checkbox" name="early_team" {% if camper.early_team %} checked {% endif %}/> <br/>
@@ -126,6 +130,7 @@ Edit User Info
     <option value='after_dinner'>After Dinner</option>
   </select>
 
+<input type="submit" action="/camper/edit"/ value="Save"/>
 <h2> Logistical Info </h2>
 
 Transportation Means
@@ -147,6 +152,8 @@ Camping in dorm tent: <input type="checkbox" name="dorm_tent" {% if camper.dorm_
 
 Structures bringing:<br/> 
 <textarea name="structure_info" rows=5 cols=80>{{camper.structure_info}}</textarea>
+
+<input type="submit" action="/camper/edit"/ value="Save"/>
 
 <h2> Food Info </h2>
 
@@ -171,10 +178,10 @@ Dietary Restrictions:<br/>
 <textarea name="dietary_restriction" rows=5 cols=80>{{camper.dietary_restriction}}</textarea>
 
 
-<br/><input type="submit" action="/camper/edit"/ value="Save"/>
+<br/>
+<input type="submit" action="/camper/edit"/ value="Save"/>
 
   <input type="hidden" name="eats_human" value="{% if camper.eats_human %}on{% else %}off{% endif %}"/>
-  <input type="hidden" name="photo" value="{{camper.photo}}"/>
 </form>
 
 
