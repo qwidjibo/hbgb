@@ -8,6 +8,7 @@ from google.appengine.dist import use_library
 use_library('django', '0.96')
 
 from django.utils import simplejson
+from google.appengine.api import images
 from google.appengine.api import users
 from google.appengine.ext import db
 from google.appengine.ext import webapp
@@ -22,7 +23,7 @@ import healer
 class UpdatePhoto(webapp.RequestHandler):
     def post(self):
 	camper = db.get(self.request.get('camper_key'))
-	camper.photo = db.Blob(self.request.get('photo'))
+	camper.photo = images.resize(self.request.get('photo'), 128, 128)
         camper.put() 
         if self.request.get('redirect'):
           self.redirect(self.request.get('redirect'))
