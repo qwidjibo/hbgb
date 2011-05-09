@@ -210,26 +210,26 @@ class CampersAdminPage(webapp.RequestHandler):
         accepted_campers = []
         waitlisted_campers = []
         rejected_campers = []
+	withdrew_campers = []
         for camper in campers:
             logging.error(camper.status)
             if camper.status == 'registered':
-                logging.error('got ' + camper.status)
                 registered_campers.append(camper)
             if camper.status == 'accepted':
-                logging.error('got ' + camper.status)
                 accepted_campers.append(camper)
             if camper.status == 'rejected':
-                logging.error('got ' + camper.status)
                 rejected_campers.append(camper)
             if camper.status == 'waitlisted':
-                logging.error('got ' + camper.status)
                 waitlisted_campers.append(camper)            
+            if camper.status == 'withdrew':
+                withdrew_campers.append(camper)
 
         self.response.out.write(template.render(path, {'conf' : conf, 
                                                        'registered_campers' : registered_campers,
                                                        'accepted_campers' : accepted_campers,
                                                        'rejected_campers' : rejected_campers,
-                                                       'waitlisted_campers' : waitlisted_campers
+                                                       'waitlisted_campers' : waitlisted_campers,
+						       'withdrew_campers' : withdrew_campers
                                                        }))
 
 class CamperEditStatusFormSubmit(webapp.RequestHandler):

@@ -11,7 +11,8 @@ class Camper(db.Model):
             'registered',
             'accepted',
             'rejected',
-            'waitlisted'
+            'waitlisted',
+	    'withdrew'
             ],
         default='new')
     realname = db.StringProperty()
