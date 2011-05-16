@@ -1,0 +1,38 @@
+{% extends "reg_template.html" %}
+
+{% block subtitle %}
+Photo Upload
+{% endblock %}
+
+{% block content %}
+<form action="/camper/update_photo" method="post" enctype="multipart/form-data">
+
+  <input type="hidden" name="camper_key" value="{{camper.key}}"/>
+
+Hi {{ camper.realname }}!
+
+{% if camper.photo %}
+Here is the photo we have for you currently: 
+<br/>
+<img src="/camper/photo?camper_key={{camper.key}}"/>
+<br/>
+Use this form to replace it with another:
+{% else %}
+Please give us a wonderful picture of you!
+{% endif %}
+
+<br/><input type="file" name="photo"/>
+
+<p>
+We are putting together a 'current campers' page on the site. If you are comfortable with having your playa name and picture displayed, please check here <input type="checkbox" name="allow_public_photo"/>
+</p>
+
+<p>
+If you'd like to update your playa name, you can do that here as well: <input type="text" name="playaname" value="{{camper.playaname}}" length=30/>
+</p>
+
+<input type="hidden" name="redirect" value="/camper/update_photo?camper_key={{camper.key}}"/>
+<input type="submit" action="/camper/edit" value="Save"/>
+</form>
+
+{% endblock %}
