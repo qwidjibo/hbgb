@@ -28,7 +28,8 @@ class UpdatePhoto(webapp.RequestHandler):
 
     def post(self):
 	camper = db.get(self.request.get('camper_key'))
-	camper.photo = images.resize(self.request.get('photo'), 256, 256)
+        if self.request.get('photo'): 
+	  camper.photo = images.resize(self.request.get('photo'), 256, 256)
 	camper.allow_public_photo = self.request.get('allow_public_photo') == 'on'
 	if self.request.get('playaname'):
 	  camper.playaname = self.request.get('playaname')

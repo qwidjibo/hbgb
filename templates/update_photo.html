@@ -24,7 +24,7 @@ Please give us a wonderful picture of you!
 <br/><input type="file" name="photo"/>
 
 <p>
-We are putting together a 'current campers' page on the site. If you are comfortable with having your playa name and picture displayed, please check here <input type="checkbox" name="allow_public_photo"/>
+We are putting together a 'current campers' page on the site. If you are comfortable with having your playa name and picture displayed, please check here <input type="checkbox" name="allow_public_photo" {% if camper.allow_public_photo %}checked{% endif %}/>
 </p>
 
 <p>
