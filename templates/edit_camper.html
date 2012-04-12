@@ -32,6 +32,7 @@ Edit User Info
 
 <h2> Application Info </h2>
 
+  Has Ticket <input name="ticket" type="checkbox" {% if camper.has_ticket %} checked {% endif %}/> <br/>
   Returning HeeBee <input name="returning" type="checkbox" {% if camper.returning %} checked {% endif %}/> <br/>
   Years As HeeBee <input name="years_as_heebee" type="text" size="30" value="{{camper.years_as_heebee}}"/> <br/>
   Previous Camps <br/> <textarea name="previous_camps" rows=4 cols=80>{{camper.previous_camps}}</textarea> <br/> 

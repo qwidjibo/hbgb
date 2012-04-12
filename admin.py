@@ -123,7 +123,6 @@ class MealsData(webapp.RequestHandler):
                        'bacon' : 0,
                        'fish' : 0,
                        'tofu' : 0,
-                       'human' : 0,
                        'total' : 0 }
         meal_counts = []
         campers = []
@@ -327,11 +326,11 @@ application = webapp.WSGIApplication(
         ('/admin/dates/delete', DateDeleteFormSubmit),
         ('/admin/committee/add', CommitteeAddFormSubmit),
         ('/admin/committee/delete', CommitteeDeleteFormSubmit),
-	('/admin/structures', StructureReport),
-	('/admin/meals_data.csv', MealsData),
+		('/admin/structures', StructureReport),
+		('/admin/meals_data.csv', MealsData),
         ('/admin/meals', MealsSpreadsheet),
-	('/admin/early_team_strike_team', EarlyTeamStrikeTeamReport)
-        ],
+		('/admin/early_team_strike_team', EarlyTeamStrikeTeamReport)
+    ],
     debug=True)
 
 def main():

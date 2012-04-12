@@ -79,6 +79,7 @@ class CamperEditForm(webapp.RequestHandler):
 	camper.playaname = self.request.get('playaname')
 	camper.email = self.request.get('email')
 	camper.address = self.request.get('address')
+	camper.has_ticket = self.request.get('ticket') == 'on'
 	camper.returning = self.request.get('returning') == 'on'
 	camper.years_as_heebee = self.request.get('years_as_heebee')
 	camper.previous_camps = self.request.get('previous_camps')
@@ -144,9 +145,9 @@ application = webapp.WSGIApplication(
     [
         ('/camper/edit', CamperEditForm),
         ('/camper/update_missing_data', CamperMissingDataForm),
-	('/camper/photo', GetPicture),
-	('/camper/update_photo', UpdatePhoto)
-        ],
+	    ('/camper/photo', GetPicture),
+	    ('/camper/update_photo', UpdatePhoto)
+    ],
     debug=True)
 
 def main():

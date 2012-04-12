@@ -7,6 +7,7 @@ from google.appengine.dist import use_library
 use_library('django', '0.96')
 
 from google.appengine.api import mail
+from google.appengine.api import images
 from google.appengine.api import users
 from google.appengine.ext import db
 from google.appengine.ext import webapp
@@ -40,6 +41,7 @@ class LandingPage(webapp.RequestHandler):
         camper.playaname = self.request.get('playaname')
         camper.phone = self.request.get('phone')
         camper.address = self.request.get('address')
+        camper.has_ticket = self.request.get('ticket') == 'on'
         camper.returning = self.request.get('returning') == 'on'
         camper.put()
 
@@ -103,7 +105,6 @@ class PlayaInfoPage(webapp.RequestHandler):
         camper.eats_bacon = self.request.get('eats_bacon') == 'on'
         camper.eats_fish = self.request.get('eats_fish') == 'on'
         camper.eats_tofu = self.request.get('eats_tofu') == 'on'
-        camper.eats_human = self.request.get('eats_human') == 'on'
         camper.dietary_restrictions = self.request.get('dietary_restrictions')
         camper.put()
 
@@ -174,8 +175,8 @@ class PhotoUploadPage(webapp.RequestHandler):
 
     def post(self):
         camper = db.get(self.request.cookies['_camper_key'])
-        if self.request.get("photo") is '':
-          camper.photo = db.Blob(self.request.get("photo"))
+        if self.request.get("photo"):
+        	camper.photo = images.resize(self.request.get('photo'), 256, 256)
         camper.put()
         self.redirect('/register/confirm')
 

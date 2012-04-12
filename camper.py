@@ -21,6 +21,7 @@ class Camper(db.Model):
     phone = db.PhoneNumberProperty()
     address = db.PostalAddressProperty()
     returning = db.BooleanProperty()
+    has_ticket = db.BooleanProperty()
 
     years_as_heebee = db.StringProperty()
     previous_camps = db.TextProperty()
@@ -81,7 +82,6 @@ class Camper(db.Model):
     eats_bacon = db.BooleanProperty()
     eats_fish = db.BooleanProperty()
     eats_tofu = db.BooleanProperty()
-    eats_human = db.BooleanProperty()
 
     dietary_restrictions = db.TextProperty()
 
